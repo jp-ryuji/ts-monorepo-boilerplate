@@ -151,6 +151,7 @@ For Docker-based development:
 
 - Uses `docker/Dockerfile.dev` with build arguments
 - Runs services in development mode with hot-reloading
+- For details on how pnpm monorepo works with Docker, see [pnpm Docker documentation](./docs/pnpm-docker.md)
 
 ### Production (`compose.prod.yml`)
 
@@ -178,6 +179,10 @@ For Docker-based development:
 | `pnpm docker:down`  | Stop Docker services                       |
 | `pnpm docker:build` | Build Docker images                        |
 | `pnpm docker:logs`  | View Docker logs                           |
+
+## Package Management
+
+This project uses pnpm for package management in a monorepo structure. For details on how pnpm works with Docker in this project, see [pnpm Docker documentation](./docs/pnpm-docker.md).
 
 ### API Scripts (`apps/api/package.json`)
 
