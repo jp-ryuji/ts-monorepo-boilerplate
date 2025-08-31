@@ -31,7 +31,8 @@
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:build": "docker compose build",
-    "docker:logs": "docker compose logs -f"
+    "docker:logs": "docker compose logs -f",
+    "docker:sync": "sh ./scripts/sync-deps.sh"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",

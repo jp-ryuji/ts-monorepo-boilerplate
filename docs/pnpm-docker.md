@@ -17,6 +17,7 @@ pnpm creates a single `node_modules` directory at the root of the project rather
 ### Workspace Dependencies
 
 In our monorepo:
+
 - `apps/api` - NestJS backend application
 - `apps/web` - NextJS frontend application
 
@@ -24,34 +25,55 @@ Each workspace has its own dependencies defined in their respective `package.jso
 
 ## Docker Volume Configuration
 
-Our Docker setup uses bind mounts to ensure immediate reflection of package changes:
+Our Docker setup uses a combination of bind mounts and anonymous volumes for optimal cross-platform compatibility:
 
 ```yaml
 volumes:
   - .:/app                  # Mount entire project
-  - ./node_modules:/app/node_modules  # Mount local node_modules directly
+  - /app/node_modules       # Anonymous volume for node_modules
 ```
 
 This configuration:
+
 1. Mounts the entire project directory to `/app` in the container
-2. Directly mounts the local `node_modules` to the container's `node_modules`
-3. Ensures any package installations or updates are immediately available in the container
+2. Uses an anonymous volume for `/app/node_modules` to isolate container dependencies
+3. Prevents binary compatibility issues between macOS and Alpine Linux
 
 ## Benefits of This Approach
 
-1. **No Rebuilds Needed**: Adding new packages locally immediately makes them available in containers
-2. **No Manual Installation**: No need to run `pnpm install` in containers after local installs
-3. **Efficient Storage**: pnpm's approach reduces disk space usage
-4. **Consistent Dependencies**: All workspaces share the same dependency resolution
+1. **Cross-Platform Compatibility**: Works reliably between macOS development and Alpine Linux containers
+2. **File System Isolation**: Prevents issues with binary modules
+3. **Source Code Synchronization**: All source code changes are immediately reflected in containers
 
 ## Workflow
 
+When adding new packages:
+
 1. Install new packages locally: `pnpm add <package> --filter <workspace>`
-2. Changes are immediately reflected in running containers
-3. No need to restart containers or rebuild images for dependency changes
+2. Update containers by running install in the container:
 
-## Important Notes
+   ```bash
+   # For API service
+   docker exec -it saas-api-dev pnpm install
 
-- This setup works best when your local environment matches the container environment
-- Initial package installation should be done in the container to ensure proper binary compilation
-- pnpm's approach ensures each workspace gets the correct dependencies despite sharing a single node_modules directory
+   # For Web service
+   docker exec -it saas-web-dev pnpm install
+   ```
+
+   Or use the convenience script:
+
+   ```bash
+   pnpm docker:sync
+   ```
+
+3. No need to rebuild containers for dependency changes
+
+## Why Not Direct node_modules Mounting?
+
+Directly mounting `./node_modules:/app/node_modules` can cause issues:
+
+1. **Binary Incompatibility**: Native modules compiled on macOS won't work on Alpine Linux
+2. **File System Differences**: Different file systems can cause permission and performance issues
+3. **Path Issues**: Different operating systems handle paths differently
+
+The anonymous volume approach provides better isolation while still allowing immediate source code synchronization.

@@ -12,7 +12,7 @@ services:
           - api.saas.local
     volumes:
       - .:/app
-      - ./node_modules:/app/node_modules
+      - /app/node_modules
     ports:
       - '${API_PORT_EXTERNAL:-3000}:3000'
     environment:
@@ -40,7 +40,7 @@ services:
           - web.saas.local
     volumes:
       - .:/app
-      - ./node_modules:/app/node_modules
+      - /app/node_modules
       - /app/.next
     ports:
       - '${WEB_PORT_EXTERNAL:-3001}:3001'

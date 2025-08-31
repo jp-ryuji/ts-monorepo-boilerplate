@@ -21,6 +21,7 @@ A monorepo boilerplate for SaaS applications with NestJS API and Next.js fronten
     - [Production (`compose.prod.yml`)](#production-composeprodyml)
   - [Available Scripts](#available-scripts)
     - [Root Scripts (`package.json`)](#root-scripts-packagejson)
+  - [Package Management](#package-management)
     - [API Scripts (`apps/api/package.json`)](#api-scripts-appsapipackagejson)
     - [Web Scripts (`apps/web/package.json`)](#web-scripts-appswebpackagejson)
   - [Project Structure Details](#project-structure-details)
@@ -179,10 +180,19 @@ For Docker-based development:
 | `pnpm docker:down`  | Stop Docker services                       |
 | `pnpm docker:build` | Build Docker images                        |
 | `pnpm docker:logs`  | View Docker logs                           |
+| `pnpm docker:sync`  | Sync dependencies to Docker containers     |
 
 ## Package Management
 
 This project uses pnpm for package management in a monorepo structure. For details on how pnpm works with Docker in this project, see [pnpm Docker documentation](./docs/pnpm-docker.md).
+
+When adding new dependencies, use `pnpm docker:sync` to synchronize packages between your local environment and Docker containers.
+
+## Documentation
+
+Find specific documentation in the [docs/](docs/) folder:
+
+- [pnpm Monorepo with Docker](docs/pnpm-docker.md)
 
 ### API Scripts (`apps/api/package.json`)
 
@@ -204,6 +214,8 @@ This project uses pnpm for package management in a monorepo structure. For detai
 ## Project Structure Details
 
 ### API Service (`apps/api/`)
+
+ applica
 
 - NestJS
 - TypeScript
