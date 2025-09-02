@@ -20,11 +20,9 @@
     "test:watch": "concurrently \"pnpm --filter api test:watch\" \"pnpm --filter web test:watch\"",
     "test:api:watch": "pnpm --filter api test:watch",
     "test:e2e": "pnpm --filter api test:e2e",
-    "lint": "pnpm --filter api lint && pnpm --filter web lint",
-    "lint:api": "pnpm --filter api lint",
-    "lint:web": "pnpm --filter web lint",
-    "format": "pnpm --filter api format && prettier --write .",
-    "format:api": "pnpm --filter api format",
+    "lint": "prettier --check . && pnpm --filter api lint && pnpm --filter web lint",
+    "lint:fix": "prettier --write . && pnpm --filter api run lint && pnpm --filter web run lint:fix",
+    "lint-staged": "lint-staged",
     "clean": "rimraf apps/*/dist apps/*/node_modules node_modules",
     "clean:api": "rimraf apps/api/dist apps/api/node_modules",
     "clean:web": "rimraf apps/web/.next apps/web/node_modules",
@@ -32,10 +30,13 @@
     "docker:down": "docker compose down",
     "docker:build": "docker compose build",
     "docker:logs": "docker compose logs -f",
-    "docker:sync": "sh ./scripts/sync-deps.sh"
+    "docker:sync": "sh ./scripts/sync-deps.sh",
+    "prepare": "husky"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.6",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1"
   },

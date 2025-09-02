@@ -146,3 +146,4 @@ Or build individual services:
 ```bash
 pnpm build:api
 pnpm build:web
+```
