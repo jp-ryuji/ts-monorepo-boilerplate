@@ -29,8 +29,8 @@ Our Docker setup uses a combination of bind mounts and anonymous volumes for opt
 
 ```yaml
 volumes:
-  - .:/app                  # Mount entire project
-  - /app/node_modules       # Anonymous volume for node_modules
+  - .:/app # Mount entire project
+  - /app/node_modules # Anonymous volume for node_modules
 ```
 
 This configuration:
