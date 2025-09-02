@@ -15,3 +15,4 @@ Find detailed documentation in the [docs/](docs/) folder:
 - [Testing](docs/testing.md) - Testing strategies and commands
 - [Deployment](docs/deployment.md) - Deployment procedures
 - [pnpm Monorepo with Docker](docs/pnpm-docker.md) - How pnpm works with Docker
+- [Linting and Formatting](docs/linting-and-formatting.md) - Code style standards and usage
