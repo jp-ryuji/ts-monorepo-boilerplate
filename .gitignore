@@ -40,6 +40,3 @@ temp/
 .temp/
 .tmp/
 
-# App specific configuration
-apps/*/eslint.config.mjs
-
