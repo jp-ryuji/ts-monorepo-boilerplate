@@ -30,7 +30,7 @@ To automatically fix both formatting and linting issues:
 pnpm lint:fix
 ```
 
-This command runs Biome with the `check --apply` flag to fix formatting and linting issues.
+This command runs Biome with the `check --write` flag to fix formatting and linting issues.
 
 Note: The `pnpm lint:fix` command is not run automatically on commit. You should run it manually when you want to auto-fix issues.
 
