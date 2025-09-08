@@ -19,4 +19,4 @@ Find detailed documentation in the [docs/](docs/) folder:
 
 ## Code Quality
 
-This project uses automated code formatting and linting to ensure consistency. On every commit, staged files are checked with Prettier and ESLint. If any issues are found, the commit will be blocked until they are fixed manually.
+This project uses automated code formatting and linting to ensure consistency. On every commit, staged files are checked with Biome. If any issues are found, the commit will be blocked until they are fixed manually.

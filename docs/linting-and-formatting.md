@@ -6,8 +6,7 @@ This document explains the current linting and formatting setup in the monorepo 
 
 The monorepo now has a consistent code style and quality standard across all applications:
 
-- **Prettier**: Centralized formatting configuration at the root level
-- **ESLint**: Standardized linting rules for both Web and API applications with Prettier integration
+- **Biome**: Centralized formatting and linting configuration at the root level
 - **Ignore Files**: Properly configured ignore files to exclude generated files
 - **Git Hooks**: Automatic linting and formatting on commit using husky and lint-staged
 
@@ -21,10 +20,7 @@ To check both formatting and linting issues across the entire monorepo:
 pnpm lint
 ```
 
-This command runs:
-
-1. Prettier with the `--check` flag to verify formatting
-2. ESLint on both API and Web applications to check for linting issues
+This command runs Biome with the `check` command to verify both formatting and linting issues.
 
 ### Fix Code Quality Issues (Linting with Auto-fix)
 
@@ -34,10 +30,7 @@ To automatically fix both formatting and linting issues:
 pnpm lint:fix
 ```
 
-This command runs:
-
-1. Prettier with the `--write` flag to fix formatting issues
-2. ESLint with the `--fix` flag on both API and Web applications to fix linting issues
+This command runs Biome with the `check --write` flag to fix formatting and linting issues.
 
 Note: The `pnpm lint:fix` command is not run automatically on commit. You should run it manually when you want to auto-fix issues.
 
@@ -45,8 +38,7 @@ Note: The `pnpm lint:fix` command is not run automatically on commit. You should
 
 Every time you make a commit, lint-staged will automatically:
 
-1. Run Prettier on all staged files to check formatting (without auto-fixing)
-2. Run ESLint to check for linting issues (without auto-fixing)
+1. Run Biome on all staged files to check formatting and linting issues (without auto-fixing)
 
 If any issues are found, the commit will be aborted, and you'll need to manually fix the issues before committing again. You can use `pnpm lint:fix` to help with this.
 

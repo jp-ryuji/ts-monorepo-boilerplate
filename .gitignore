@@ -16,7 +16,7 @@ yarn-debug.log*
 # OS files
 .DS_Store
 .DS_Store?
-._*
+._
 Thumbs.db
 
 # IDE workspace files (root level)
