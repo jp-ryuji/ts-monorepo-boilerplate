@@ -16,7 +16,7 @@ yarn-debug.log*
 # OS files
 .DS_Store
 .DS_Store?
-._*
+._
 Thumbs.db
 
 # IDE workspace files (root level)
@@ -39,4 +39,7 @@ tmp/
 temp/
 .temp/
 .tmp/
+
+# App specific configuration
+apps/*/eslint.config.mjs
 

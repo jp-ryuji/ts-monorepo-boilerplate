@@ -20,8 +20,8 @@
     "test:watch": "concurrently \"pnpm --filter api test:watch\" \"pnpm --filter web test:watch\"",
     "test:api:watch": "pnpm --filter api test:watch",
     "test:e2e": "pnpm --filter api test:e2e",
-    "lint": "prettier --check . && pnpm --filter api lint && pnpm --filter web lint",
-    "lint:fix": "prettier --write . && pnpm --filter api run lint && pnpm --filter web run lint:fix",
+    "lint": "biome check .",
+    "lint:fix": "biome check --apply .",
     "lint-staged": "lint-staged",
     "clean": "rimraf apps/*/dist apps/*/node_modules node_modules",
     "clean:api": "rimraf apps/api/dist apps/api/node_modules",
@@ -34,10 +34,10 @@
     "prepare": "husky"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.2.3",
     "concurrently": "^9.2.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.6",
-    "prettier": "^3.4.2",
     "rimraf": "^6.0.1"
   },
   "engines": {
