@@ -1,6 +1,6 @@
 # TS Monorepo Boilerplate
 
-A monorepo boilerplate for TypeScript applications with NestJS API and Next.js frontend, using Docker for containerization and pnpm for package management.
+A monorepo boilerplate for TypeScript applications with NestJS API and Next.js frontend, using Docker for containerization, PostgreSQL for database, Redis for caching, and pnpm for package management.
 
 ## Documentation
 
@@ -16,6 +16,7 @@ Find detailed documentation in the [docs/](docs/) folder:
 - [Deployment](docs/deployment.md) - Deployment procedures
 - [pnpm Monorepo with Docker](docs/pnpm-docker.md) - How pnpm works with Docker
 - [Linting and Formatting](docs/linting-and-formatting.md) - Code style standards and usage
+- [Prisma Configuration](docs/prisma.md) - Database schema management and ORM usage
 
 ## Code Quality
 

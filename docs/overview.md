@@ -7,7 +7,8 @@ This boilerplate provides a complete starting point for building TypeScript appl
 - **Monorepo Architecture**: Using pnpm workspaces for efficient package management
 - **Full-Stack Development**: NestJS backend with Next.js frontend
 - **Containerization**: Docker and Docker Compose for consistent development and deployment
-- **Database Integration**: PostgreSQL with Redis for caching
+- **Database Integration**: PostgreSQL with Prisma ORM
+- **Caching**: Redis for improved performance
 - **Modern Tooling**: TypeScript, Biome for code quality
 
 ## Use Cases
@@ -17,4 +18,5 @@ This boilerplate is ideal for:
 - TypeScript applications requiring a robust backend and modern frontend
 - Teams looking to adopt monorepo architecture
 - Projects requiring containerized deployment
-- Applications needing PostgreSQL and Redis integration
+- Applications needing PostgreSQL database integration with Prisma ORM
+- Projects that benefit from Redis caching
