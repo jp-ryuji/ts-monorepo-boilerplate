@@ -24,7 +24,6 @@
 ### API Service (`apps/api/`)
 
 - NestJS application
-- REST API endpoints
 
 ### Web Service (`apps/web/`)
 
@@ -51,11 +50,3 @@ Intended for shared packages across services:
 - Common utilities
 - Shared types and interfaces
 - Business logic modules
-
-## Configuration Files
-
-- `package.json`: Root package configuration with workspace scripts
-- `pnpm-workspace.yaml`: Defines workspace packages
-- `compose.dev.yml`: Development Docker Compose configuration
-- `compose.prod.yml`: Production Docker Compose configuration
-- `.env.example`: Template for environment variables
