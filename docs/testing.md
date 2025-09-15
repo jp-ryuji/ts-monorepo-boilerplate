@@ -2,7 +2,7 @@
 
 ## API Testing
 
-The API service uses Jest as the testing framework with the following configuration:
+The API service uses Vitest as the testing framework with the following configuration:
 
 ### Test Types
 
@@ -20,7 +20,7 @@ apps/api/
 │   ├── unit/             # Unit tests
 │   ├── integration/      # Integration tests
 │   └── e2e/              # End-to-end tests
-└── jest.config.ts        # Jest configuration
+└── vitest.config.mts     # Vitest configuration
 ```
 
 ### Running API Tests
@@ -44,7 +44,7 @@ pnpm --filter api test:debug
 
 ## Web Testing
 
-The web service uses Jest with React Testing Library for testing React components.
+The web service uses Vitest with React Testing Library for testing React components.
 
 ### Test Structure
 
@@ -53,7 +53,7 @@ apps/web/
 ├── src/
 │   └── *.tsx             # Source code
 ├── __tests__/            # Test files
-└── jest.config.ts        # Jest configuration
+└── vitest.config.mts     # Vitest configuration
 ```
 
 ### Running Web Tests
@@ -108,7 +108,7 @@ describe('UsersController', () => {
   describe('findOne', () => {
     it('should return a user object', async () => {
       const result = { id: 1, name: 'John Doe' };
-      jest.spyOn(service, 'findOne').mockImplementation(() => result);
+      vi.spyOn(service, 'findOne').mockImplementation(() => result);
 
       expect(await controller.findOne(1)).toBe(result);
     });
@@ -133,7 +133,7 @@ import LoginForm from './LoginForm';
 
 test('submits login form', async () => {
   const user = userEvent.setup();
-  const mockLogin = jest.fn();
+  const mockLogin = vi.fn();
 
   render(<LoginForm onLogin={mockLogin} />);
 
@@ -170,8 +170,8 @@ In a CI environment, you might want to run tests with specific options:
 # Run tests in CI mode
 pnpm test --ci --coverage
 
-# Run tests with maximum workers for faster execution
-pnpm test --maxWorkers=4
+# Run tests with maximum threads for faster execution
+pnpm test --threads=false
 ```
 
 ## Debugging Tests
@@ -187,7 +187,7 @@ To debug tests:
 pnpm --filter api test:debug
 
 # Debug web tests (in Chrome DevTools)
-node --inspect-brk node_modules/.bin/jest --runInBand
+node --inspect-brk node_modules/.bin/vitest --inspect-brk
 ```
 
 ## Writing Effective Tests
@@ -198,3 +198,21 @@ node --inspect-brk node_modules/.bin/jest --runInBand
 4. **Test one thing per test** - keep tests focused
 5. **Use appropriate assertions** - check what matters for the test
 6. **Clean up after tests** - restore any state changed during tests
+
+## Dependency Notes
+
+### Jest Dependencies in Lockfile
+
+You may notice that there are still Jest-related dependencies in the `pnpm-lock.yaml` file, even though this project uses Vitest. This is expected and not a problem:
+
+1. **Transitive Dependencies**: These Jest dependencies are pulled in as transitive dependencies by NestJS tooling (`@nestjs/testing`, `@nestjs/cli`, etc.)
+2. **Not Actively Used**: While present in the lockfile, these dependencies are not actively used since the project uses Vitest for testing
+3. **No Runtime Impact**: These are development dependencies that don't affect runtime performance
+4. **Tooling Requirements**: The NestJS CLI and related tooling may still require these dependencies for their internal functionality
+
+These dependencies include:
+- `jest` and related packages
+- `@types/jest` for TypeScript type definitions
+- `ts-jest` for TypeScript support in Jest
+
+Since these are not directly used in the project and the tests are working correctly with Vitest, there's no need to remove them. Attempting to remove them might break the NestJS tooling or cause issues with future updates.
