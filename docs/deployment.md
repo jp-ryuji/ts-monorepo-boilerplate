@@ -1,7 +1,5 @@
 # Deployment
 
-*This doc is not complete*
-
 ## Production Deployment with Docker
 
 ### Building Production Images
@@ -43,3 +41,22 @@ For manual deployment without Docker:
    ```bash
    pnpm start
    ```
+
+## Environment Configuration
+
+Ensure all environment variables are properly configured for production:
+
+- Database connection strings
+- API keys and secrets
+- Port configurations
+- Redis connection settings
+
+## Scaling Considerations
+
+For production deployments, consider:
+
+1. Load balancing for the web service
+2. Database connection pooling
+3. Redis clustering for caching
+4. Health checks and monitoring
+5. Backup and recovery procedures
