@@ -33,11 +33,6 @@ The root `package.json` file contains scripts for managing the entire monorepo:
 | `pnpm docker:build`   | Build Docker images                           | `docker compose build`                                                       |
 | `pnpm docker:logs`    | View Docker logs                              | `docker compose logs -f`                                                     |
 | `pnpm docker:sync`    | Sync dependencies to Docker containers        | `sh ./scripts/sync-deps.sh`                                                  |
-| `pnpm prisma:generate`| Generate Prisma Client                        | `pnpm --filter api prisma:generate`                                          |
-| `pnpm prisma:migrate:dev`| Create and apply development migrations    | `pnpm --filter api prisma:migrate:dev`                                       |
-| `pnpm prisma:migrate:deploy`| Deploy migrations to database           | `pnpm --filter api prisma:migrate:deploy`                                    |
-| `pnpm prisma:studio`  | Open Prisma Studio for database management    | `pnpm --filter api prisma:studio`                                            |
-| `pnpm prisma:seed`    | Seed the database with sample data            | `pnpm --filter api prisma:seed`                                              |
 
 ## API Scripts (`apps/api/package.json`)
 
@@ -57,11 +52,6 @@ The API service has its own set of scripts in `apps/api/package.json`:
 | `pnpm test:debug`  | Run API tests in debug mode                      | `vitest --inspect-brk`                                                                                 |
 | `pnpm test:e2e`    | Run end-to-end tests                             | `vitest run --config ./test/vitest-e2e.config.mjs`                                                     |
 | `pnpm lint`        | Lint the API service                             | `biome check "src/**/*.ts" "test/**/*.ts"`                                                             |
-| `pnpm prisma:generate` | Generate Prisma Client                       | `prisma generate`                                                                                      |
-| `pnpm prisma:migrate:dev` | Create and apply development migrations   | `prisma migrate dev`                                                                                   |
-| `pnpm prisma:migrate:deploy` | Deploy migrations to database          | `prisma migrate deploy`                                                                                |
-| `pnpm prisma:studio` | Open Prisma Studio for database management    | `prisma studio`                                                                                        |
-| `pnpm prisma:seed` | Seed the database with sample data              | `ts-node prisma/seed.ts`                                                                               |
 
 ## Web Scripts (`apps/web/package.json`)
 

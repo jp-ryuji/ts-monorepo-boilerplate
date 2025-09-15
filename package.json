@@ -2,7 +2,7 @@
   "name": "ts-monorepo-boilerplate",
   "version": "1.0.0",
   "private": true,
-  "description": "TypeScript monorepo boilerplate with NestJS API and Next.js frontend",
+  "description": "TypeScript monorepo boilerplate with NestJS API and React frontend",
   "packageManager": "pnpm@10.16.1",
   "scripts": {
     "dev": "concurrently \"pnpm --filter api start:dev\" \"pnpm --filter web dev\"",
@@ -33,11 +33,6 @@
     "docker:build": "docker compose build",
     "docker:logs": "docker compose logs -f",
     "docker:sync": "sh ./scripts/sync-deps.sh",
-    "prisma:generate": "pnpm --filter api prisma:generate",
-    "prisma:migrate:dev": "pnpm --filter api prisma:migrate:dev",
-    "prisma:migrate:deploy": "pnpm --filter api prisma:migrate:deploy",
-    "prisma:studio": "pnpm --filter api prisma:studio",
-    "prisma:seed": "pnpm --filter api prisma:seed",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -59,7 +54,7 @@
     "tsmono",
     "boilerplate",
     "nestjs",
-    "nextjs",
+    "react",
     "typescript",
     "monorepo",
     "pnpm"

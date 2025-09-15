@@ -58,7 +58,7 @@ services:
     networks:
       - tsmono-network
     ports:
-      - '${DB_PORT_EXTERNAL:-5433}:5432'
+      - '${DB_PORT_EXTERNAL:-5432}:5432'
     environment:
       - POSTGRES_USER=${DB_USER:-tsmono_user}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-tsmono_password}
