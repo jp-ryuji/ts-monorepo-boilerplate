@@ -8,7 +8,7 @@ This boilerplate provides a complete starting point for building TypeScript appl
 - **Full-Stack Development**: NestJS backend with Next.js frontend
 - **Containerization**: Docker and Docker Compose for consistent development and deployment
 - **Database Integration**: PostgreSQL with Redis for caching
-- **Modern Tooling**: TypeScript, ESLint, Prettier for code quality
+- **Modern Tooling**: TypeScript, Biome for code quality
 
 ## Use Cases
 
