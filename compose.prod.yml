@@ -1,13 +1,13 @@
 services:
   api:
-    container_name: saas-api
+    container_name: tsmono-api
     build:
       context: ./apps/api
       dockerfile: Dockerfile
     networks:
-      saas-network:
+      tsmono-network:
         aliases:
-          - api.saas.local
+          - api.tsmono.local
     ports:
       - '${API_PORT_EXTERNAL:-3000}:3000'
     environment:
@@ -29,19 +29,19 @@ services:
     restart: unless-stopped
 
   web:
-    container_name: saas-web
+    container_name: tsmono-web
     build:
       context: ./apps/web
       dockerfile: Dockerfile
     networks:
-      saas-network:
+      tsmono-network:
         aliases:
-          - web.saas.local
+          - web.tsmono.local
     ports:
       - '${WEB_PORT_EXTERNAL:-3001}:3001'
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=http://api.saas.local:3000
+      - NEXT_PUBLIC_API_URL=http://api.tsmono.local:3000
     depends_on:
       api:
         condition: service_started
@@ -54,16 +54,16 @@ services:
     restart: unless-stopped
 
   postgres:
-    container_name: saas-postgres
+    container_name: tsmono-postgres
     image: postgres:17
     networks:
-      - saas-network
+      - tsmono-network
     ports:
       - '${DB_PORT_EXTERNAL:-5432}:5432'
     environment:
-      - POSTGRES_USER=${DB_USER:-saas_user}
-      - POSTGRES_PASSWORD=${DB_PASSWORD:-saas_password}
-      - POSTGRES_DB=${DB_NAME:-saas_db}
+      - POSTGRES_USER=${DB_USER:-tsmono_user}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-tsmono_password}
+      - POSTGRES_DB=${DB_NAME:-tsmono_db}
       - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -72,7 +72,7 @@ services:
       test:
         [
           'CMD-SHELL',
-          'pg_isready -U ${DB_USER:-saas_user} -d ${DB_NAME:-saas_db}',
+          'pg_isready -U ${DB_USER:-tsmono_user} -d ${DB_NAME:-tsmono_db}',
         ]
       interval: 10s
       timeout: 5s
@@ -81,10 +81,10 @@ services:
     restart: unless-stopped
 
   redis:
-    container_name: saas-redis
+    container_name: tsmono-redis
     image: redis:8-alpine
     networks:
-      - saas-network
+      - tsmono-network
     ports:
       - '${REDIS_PORT_EXTERNAL:-6379}:6379'
     volumes:
@@ -100,12 +100,12 @@ services:
     restart: unless-stopped
 
 networks:
-  saas-network:
+  tsmono-network:
     driver: bridge
-    name: saas-monorepo-network
+    name: tsmono-monorepo-network
 
 volumes:
   postgres_data:
-    name: saas_postgres_data
+    name: tsmono_postgres_data
   redis_data:
-    name: saas_redis_data
+    name: tsmono_redis_data

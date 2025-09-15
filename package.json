@@ -1,8 +1,8 @@
 {
-  "name": "saas-monorepo-boilerplate",
+  "name": "ts-monorepo-boilerplate",
   "version": "1.0.0",
   "private": true,
-  "description": "SaaS monorepo boilerplate with NestJS API and React frontend",
+  "description": "TypeScript monorepo boilerplate with NestJS API and React frontend",
   "packageManager": "pnpm@10.16.1",
   "scripts": {
     "dev": "concurrently \"pnpm --filter api start:dev\" \"pnpm --filter web dev\"",
@@ -46,10 +46,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/saas-monorepo-boilerplate.git"
+    "url": "https://github.com/jp-ryuji/ts-monorepo-boilerplate.git"
   },
   "keywords": [
-    "saas",
+    "tsmono",
     "boilerplate",
     "nestjs",
     "react",

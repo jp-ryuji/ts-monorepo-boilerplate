@@ -1,6 +1,6 @@
 # Project Overview
 
-This boilerplate provides a complete starting point for building SaaS applications with a modern tech stack. It includes a NestJS backend API, Next.js frontend, PostgreSQL database, and Redis for caching, all containerized with Docker for easy development and deployment.
+This boilerplate provides a complete starting point for building TypeScript applications with a modern tech stack. It includes a NestJS backend API, Next.js frontend, PostgreSQL database, and Redis for caching, all containerized with Docker for easy development and deployment.
 
 ## Key Features
 
@@ -14,7 +14,7 @@ This boilerplate provides a complete starting point for building SaaS applicatio
 
 This boilerplate is ideal for:
 
-- SaaS applications requiring a robust backend and modern frontend
+- TypeScript applications requiring a robust backend and modern frontend
 - Teams looking to adopt monorepo architecture
 - Projects requiring containerized deployment
 - Applications needing PostgreSQL and Redis integration

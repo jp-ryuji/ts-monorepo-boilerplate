@@ -51,8 +51,8 @@ Download and install Docker Desktop for your platform:
 1. Clone the repository:
 
    ```bash
-   git clone git@github.com:jp-ryuji/saas-monorepo-boilerplate.git
-   cd saas-monorepo-boilerplate
+   git clone git@github.com:jp-ryuji/ts-monorepo-boilerplate.git
+   cd ts-monorepo-boilerplate
    ```
 
 2. Install dependencies:
@@ -96,7 +96,7 @@ After completing the installation and environment setup, you can verify everythi
 
    ```bash
    # This will work if you've started the development containers
-   docker compose -f compose.dev.yml exec postgres pg_isready -U saas_user -d saas_db
+   docker compose -f compose.dev.yml exec postgres pg_isready -U tsmono_user -d tsmono_db
    ```
 
-You're now ready to start development with the SaaS monorepo boilerplate!
+You're now ready to start development with the TS monorepo boilerplate!

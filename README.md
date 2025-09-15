@@ -1,6 +1,6 @@
-# SaaS Monorepo Boilerplate
+# TS Monorepo Boilerplate
 
-A monorepo boilerplate for SaaS applications with NestJS API and Next.js frontend, using Docker for containerization and pnpm for package management.
+A monorepo boilerplate for TypeScript applications with NestJS API and Next.js frontend, using Docker for containerization and pnpm for package management.
 
 ## Documentation
 
