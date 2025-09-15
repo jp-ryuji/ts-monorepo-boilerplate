@@ -13,8 +13,7 @@
 ## Development Tools
 
 - **Language**: TypeScript
-- **Linting**: ESLint
-- **Formatting**: Prettier
+- **Code Quality**: Biome (Linting and Formatting)
 - **Testing**: Vitest
 - **Build Tools**: pnpm scripts
 

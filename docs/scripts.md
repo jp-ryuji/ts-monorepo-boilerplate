@@ -21,11 +21,10 @@ The root `package.json` file contains scripts for managing the entire monorepo:
 | `pnpm test:watch`     | Run tests in watch mode for both services     | `concurrently "pnpm --filter api test:watch" "pnpm --filter web test:watch"` |
 | `pnpm test:api:watch` | Run API tests in watch mode                   | `pnpm --filter api test:watch`                                               |
 | `pnpm test:e2e`       | Run end-to-end tests for the API              | `pnpm --filter api test:e2e`                                                 |
-| `pnpm lint`           | Lint both services                            | `pnpm --filter api lint && pnpm --filter web lint`                           |
+| `pnpm lint`           | Lint both services                            | `biome check .`                                                              |
 | `pnpm lint:api`       | Lint the API service                          | `pnpm --filter api lint`                                                     |
 | `pnpm lint:web`       | Lint the web service                          | `pnpm --filter web lint`                                                     |
-| `pnpm format`         | Format code in both services                  | `pnpm --filter api format && prettier --write .`                             |
-| `pnpm format:api`     | Format code in the API service                | `pnpm --filter api format`                                                   |
+| `pnpm format`         | Format code in both services                  | `biome check --write .`                                                      |
 | `pnpm clean`          | Clean build artifacts from all services       | `rimraf apps/*/dist apps/*/node_modules node_modules`                        |
 | `pnpm clean:api`      | Clean build artifacts from the API service    | `rimraf apps/api/dist apps/api/node_modules`                                 |
 | `pnpm clean:web`      | Clean build artifacts from the web service    | `rimraf apps/web/.next apps/web/node_modules`                                |
@@ -45,14 +44,14 @@ The API service has its own set of scripts in `apps/api/package.json`:
 | `pnpm start:debug` | Start API in debug mode                          | `nest start --debug --watch`                                                                           |
 | `pnpm start:prod`  | Start the built API                              | `node dist/main`                                                                                       |
 | `pnpm build`       | Build the API for production                     | `nest build`                                                                                           |
-| `pnpm format`      | Format code                                      | `prettier --write "src/**/*.ts" "test/**/*.ts"`                                                        |
+| `pnpm format`      | Format code                                      | `biome check --write "src/**/*.ts" "test/**/*.ts"`                                                     |
 | `pnpm start`       | Start the built API (alias for start:prod)       | `node dist/main`                                                                                       |
 | `pnpm test`        | Run API tests                                    | `vitest run`                                                                                           |
 | `pnpm test:watch`  | Run API tests in watch mode                      | `vitest`                                                                                               |
 | `pnpm test:cov`    | Run API tests with coverage                      | `vitest run --coverage`                                                                                |
 | `pnpm test:debug`  | Run API tests in debug mode                      | `vitest --inspect-brk`                                                                                 |
 | `pnpm test:e2e`    | Run end-to-end tests                             | `vitest run --config ./test/vitest-e2e.config.mjs`                                                     |
-| `pnpm lint`        | Lint the API service                             | `eslint "{src,apps,libs,test}/**/*.ts" --fix`                                                          |
+| `pnpm lint`        | Lint the API service                             | `biome check "src/**/*.ts" "test/**/*.ts"`                                                             |
 
 ## Web Scripts (`apps/web/package.json`)
 
@@ -66,7 +65,7 @@ The web service has its own set of scripts in `apps/web/package.json`:
 | `pnpm test`     | Run web tests                          | `vitest run`              |
 | `pnpm test:watch` | Run web tests in watch mode          | `vitest`                  |
 | `pnpm test:cov` | Run web tests with coverage            | `vitest run --coverage`   |
-| `pnpm lint`     | Lint the web service                   | `next lint`               |
+| `pnpm lint`     | Lint the web service                   | `biome check .`           |
 
 ## Using Scripts
 

@@ -16,7 +16,8 @@
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
     "test:debug": "vitest --inspect-brk",
-    "test:e2e": "vitest run --config ./test/vitest-e2e.config.mjs"
+    "test:e2e": "vitest run --config ./test/vitest-e2e.config.mjs",
+    "lint": "biome check src/ test/"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
