@@ -4,8 +4,8 @@
 
 Before you begin development with this boilerplate, ensure you have the following installed on your system:
 
-- **Node.js** >= 22.0.0
-- **pnpm** >= 9.0.0
+- **Node.js** >= 24.0.0
+- **pnpm** >= 10.16.0
 - **Docker** & **Docker Compose**
 - **Git**
 
@@ -20,8 +20,8 @@ Using nvm:
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 
 # Install and use the required Node.js version
-nvm install 22
-nvm use 22
+nvm install 24
+nvm use 24
 ```
 
 ### Installing pnpm
@@ -29,7 +29,7 @@ nvm use 22
 pnpm is a fast, disk space efficient package manager. Install it globally using npm:
 
 ```bash
-npm install -g pnpm@9.0.0
+npm install -g pnpm@10.16.1
 ```
 
 Or using the standalone script:

@@ -40,3 +40,6 @@ temp/
 .temp/
 .tmp/
 
+# Ignore individual lockfiles if there are
+apps/*/pnpm-lock.yaml
+
