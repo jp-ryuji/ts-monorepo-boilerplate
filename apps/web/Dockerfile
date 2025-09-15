@@ -1,7 +1,7 @@
 # ---- Base ----
-FROM node:22-alpine AS base
+FROM node:24-alpine AS base
 RUN apk add --no-cache curl
-RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
+RUN corepack enable && corepack prepare pnpm@10.16.1 --activate
 WORKDIR /app
 
 # ---- Dependencies ----
@@ -16,7 +16,7 @@ COPY . .
 RUN pnpm --filter web build
 
 # ---- Production ----
-FROM node:22-alpine AS production
+FROM node:24-alpine AS production
 WORKDIR /app
 
 # Copy standalone Next.js output

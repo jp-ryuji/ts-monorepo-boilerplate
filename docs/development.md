@@ -1,37 +1,5 @@
 # Development Workflow
 
-## Prerequisites
-
-Before starting development, ensure you have the following installed:
-
-- Node.js >= 22.0.0
-- pnpm >= 9.0.0
-- Docker & Docker Compose
-- Git
-
-## Initial Setup
-
-1. Clone the repository:
-
-   ```bash
-   git clone git@github.com:jp-ryuji/ts-monorepo-boilerplate.git
-   cd ts-monorepo-boilerplate
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   pnpm install
-   ```
-
-3. Set up environment variables:
-
-   ```bash
-   cp .env.example .env
-   ```
-
-   Update the `.env` file with your configuration values.
-
 ## Running Services
 
 ### Local Development (without Docker)
