@@ -63,6 +63,28 @@ Download and install Docker Desktop for your platform:
 
    This command will install all dependencies for all workspaces in the monorepo.
 
+## Database Setup
+
+The project uses PostgreSQL for development with Prisma as the ORM. The database is run in a Docker container as defined in `compose.dev.yml`. To set up the database:
+
+1. Start the Docker services:
+
+   ```bash
+   pnpm docker:up
+   ```
+
+2. Wait for the services to be healthy, then run the initial migration:
+
+   ```bash
+   pnpm prisma:migrate:dev
+   ```
+
+3. (Optional) Seed the database with sample data:
+
+   ```bash
+   pnpm prisma:seed
+   ```
+
 ## Environment Setup
 
 The project uses environment variables for configuration. To set up your environment:
@@ -92,9 +114,16 @@ After completing the installation and environment setup, you can verify everythi
    docker compose version
    ```
 
-3. Test the database connection (if running):
+3. Test the database setup:
 
    ```bash
+   # Run Prisma Studio to view your database
+   pnpm prisma:studio
+   ```
+
+4. Test the database connection (if running / optional):
+
+    ```bash
    # This will work if you've started the development containers
    docker compose -f compose.dev.yml exec postgres pg_isready -U tsmono_user -d tsmono_db
    ```
