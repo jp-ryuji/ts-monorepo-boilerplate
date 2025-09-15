@@ -14,8 +14,8 @@ Before starting development, ensure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone git@github.com:jp-ryuji/saas-monorepo-boilerplate.git
-   cd saas-monorepo-boilerplate
+   git clone git@github.com:jp-ryuji/ts-monorepo-boilerplate.git
+   cd ts-monorepo-boilerplate
    ```
 
 2. Install dependencies:

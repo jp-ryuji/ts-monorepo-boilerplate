@@ -54,10 +54,10 @@ When adding new packages:
 
    ```bash
    # For API service
-   docker exec -it saas-api-dev pnpm install
+   docker exec -it tsmono-api-dev pnpm install
 
    # For Web service
-   docker exec -it saas-web-dev pnpm install
+   docker exec -it tsmono-web-dev pnpm install
    ```
 
    Or use the convenience script:
