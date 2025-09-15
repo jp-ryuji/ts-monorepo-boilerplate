@@ -47,23 +47,26 @@ The API service has its own set of scripts in `apps/api/package.json`:
 | `pnpm build`       | Build the API for production                     | `nest build`                                                                                           |
 | `pnpm format`      | Format code                                      | `prettier --write "src/**/*.ts" "test/**/*.ts"`                                                        |
 | `pnpm start`       | Start the built API (alias for start:prod)       | `node dist/main`                                                                                       |
-| `pnpm test`        | Run API tests                                    | `jest`                                                                                                 |
-| `pnpm test:watch`  | Run API tests in watch mode                      | `jest --watch`                                                                                         |
-| `pnpm test:cov`    | Run API tests with coverage                      | `jest --coverage`                                                                                      |
-| `pnpm test:debug`  | Run API tests in debug mode                      | `node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand` |
-| `pnpm test:e2e`    | Run end-to-end tests                             | `jest --config ./test/jest-e2e.json`                                                                   |
+| `pnpm test`        | Run API tests                                    | `vitest run`                                                                                           |
+| `pnpm test:watch`  | Run API tests in watch mode                      | `vitest`                                                                                               |
+| `pnpm test:cov`    | Run API tests with coverage                      | `vitest run --coverage`                                                                                |
+| `pnpm test:debug`  | Run API tests in debug mode                      | `vitest --inspect-brk`                                                                                 |
+| `pnpm test:e2e`    | Run end-to-end tests                             | `vitest run --config ./test/vitest-e2e.config.mjs`                                                     |
 | `pnpm lint`        | Lint the API service                             | `eslint "{src,apps,libs,test}/**/*.ts" --fix`                                                          |
 
 ## Web Scripts (`apps/web/package.json`)
 
 The web service has its own set of scripts in `apps/web/package.json`:
 
-| Script       | Description                            | Command      |
-| ------------ | -------------------------------------- | ------------ |
-| `pnpm dev`   | Start web frontend in development mode | `next dev`   |
-| `pnpm build` | Build the web frontend for production  | `next build` |
-| `pnpm start` | Start the built web frontend           | `next start` |
-| `pnpm lint`  | Lint the web service                   | `next lint`  |
+| Script          | Description                            | Command                   |
+| --------------- | -------------------------------------- | ------------------------- |
+| `pnpm dev`      | Start web frontend in development mode | `next dev --turbopack --port 3001` |
+| `pnpm build`    | Build the web frontend for production  | `next build --turbopack`  |
+| `pnpm start`    | Start the built web frontend           | `next start --port 3001`  |
+| `pnpm test`     | Run web tests                          | `vitest run`              |
+| `pnpm test:watch` | Run web tests in watch mode          | `vitest`                  |
+| `pnpm test:cov` | Run web tests with coverage            | `vitest run --coverage`   |
+| `pnpm lint`     | Lint the web service                   | `next lint`               |
 
 ## Using Scripts
 

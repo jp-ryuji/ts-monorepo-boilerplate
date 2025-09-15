@@ -15,7 +15,7 @@
 - **Language**: TypeScript
 - **Linting**: ESLint
 - **Formatting**: Prettier
-- **Testing**: Jest
+- **Testing**: Vitest
 - **Build Tools**: pnpm scripts
 
 ## Why This Stack?
