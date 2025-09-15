@@ -109,15 +109,6 @@ While the project uses PostgreSQL for development, you can configure it to work 
 2. Update the `DATABASE_URL` in your `.env` file to point to your database
 3. Create new migrations for the target database
 
-Example for SQLite:
-
-```prisma
-datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
-}
-```
-
 And in your `.env`:
 
 ```bash

@@ -12,11 +12,12 @@
 │   ├── postgres/         # PostgreSQL initialization scripts
 │   └── redis/            # Redis configuration
 ├── packages/             # Shared packages (currently empty)
-├── .env.example          # Environment variables template
 ├── compose.dev.yml       # Docker Compose for development
 ├── compose.prod.yml      # Docker Compose for production
+├── docker/Dockerfile.dev # Development Dockerfile
 ├── package.json          # Root package.json with workspace scripts
-└── pnpm-workspace.yaml   # pnpm workspace configuration
+├── pnpm-workspace.yaml   # pnpm workspace configuration
+└── .env.example          # Environment variables template
 ```
 
 ## Apps Directory
@@ -67,18 +68,6 @@ apps/web/
 └── tsconfig.json        # TypeScript configuration
 ```
 
-## Docs Directory
-
-Contains project documentation in Markdown format:
-
-- Getting started guide
-- Development workflows
-- Tech stack overview
-- Available scripts
-- Project structure
-- Deployment instructions
-- Prisma configuration
-
 ## Docker Directory
 
 ### PostgreSQL (`docker/postgres/`)
@@ -99,11 +88,3 @@ Intended for shared packages across services:
 - Common utilities
 - Shared types and interfaces
 - Business logic modules
-
-## Configuration Files
-
-- `package.json`: Root package configuration with workspace scripts
-- `pnpm-workspace.yaml`: Defines workspace packages
-- `compose.dev.yml`: Development Docker Compose configuration
-- `compose.prod.yml`: Production Docker Compose configuration
-- `.env.example`: Template for environment variables
