@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "SaaS monorepo boilerplate with NestJS API and React frontend",
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@10.16.1",
   "scripts": {
     "dev": "concurrently \"pnpm --filter api start:dev\" \"pnpm --filter web dev\"",
     "dev:api": "pnpm --filter api start:dev",
