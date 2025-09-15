@@ -2,8 +2,5 @@ packages:
   - apps/*
   - packages/*
 
-ignoredBuiltDependencies:
-  - '@prisma/client'
-
 onlyBuiltDependencies:
   - '@nestjs/core'
