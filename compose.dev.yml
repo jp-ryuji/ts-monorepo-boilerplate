@@ -3,9 +3,7 @@ services:
     container_name: tsmono-api-dev
     build:
       context: .
-      dockerfile: docker/Dockerfile.dev
-      args:
-        - SERVICE_NAME=api
+      dockerfile: apps/api/Dockerfile.dev
     networks:
       tsmono-network:
         aliases:
@@ -31,9 +29,7 @@ services:
     container_name: tsmono-web-dev
     build:
       context: .
-      dockerfile: docker/Dockerfile.dev
-      args:
-        - SERVICE_NAME=web
+      dockerfile: apps/web/Dockerfile.dev
     networks:
       tsmono-network:
         aliases:
@@ -41,7 +37,6 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-      - /app/.next
     ports:
       - '${WEB_PORT_EXTERNAL:-3001}:3001'
     environment:

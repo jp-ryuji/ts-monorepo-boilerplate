@@ -11,18 +11,30 @@ COPY apps/web/package.json apps/web/
 RUN pnpm install --frozen-lockfile --filter-prod web...
 
 # ---- Build ----
-FROM deps AS build
-COPY . .
-RUN pnpm --filter web build
+FROM base AS build
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/web ./apps/web
+WORKDIR /app
+RUN pnpm install --frozen-lockfile
+WORKDIR /app/apps/web
+RUN pnpm install --frozen-lockfile
+RUN npx next build
 
 # ---- Production ----
 FROM node:24-alpine AS production
 WORKDIR /app
 
-# Copy standalone Next.js output
-COPY --from=build /app/apps/web/.next/standalone ./
-COPY --from=build /app/apps/web/.next/static ./apps/web/.next/static
-COPY apps/web/public ./apps/web/public
+# Create non-root user
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nextjs -u 1001
+
+# Copy necessary files for production
+COPY --from=build --chown=nextjs:nodejs /app/apps/web/.next ./.next
+COPY --from=build --chown=nextjs:nodejs /app/apps/web/node_modules ./node_modules
+COPY --from=build --chown=nextjs:nodejs /app/apps/web/package.json ./package.json
+COPY --chown=nextjs:nodejs apps/web/public ./public
+
+USER nextjs
 
 EXPOSE 3001
-CMD ["node", "apps/web/server.js"]
+CMD ["npx", "next", "start"]

@@ -2,8 +2,8 @@ services:
   api:
     container_name: tsmono-api
     build:
-      context: ./apps/api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/api/Dockerfile
     networks:
       tsmono-network:
         aliases:
@@ -31,8 +31,8 @@ services:
   web:
     container_name: tsmono-web
     build:
-      context: ./apps/web
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: apps/web/Dockerfile
     networks:
       tsmono-network:
         aliases:
