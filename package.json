@@ -33,6 +33,10 @@
     "docker:build": "docker compose build",
     "docker:logs": "docker compose logs -f",
     "docker:sync": "sh ./scripts/sync-deps.sh",
+    "db:generate": "pnpm --filter api db:generate",
+    "db:migrate": "pnpm --filter api db:migrate",
+    "db:studio": "pnpm --filter api db:studio",
+    "db:migrate:programmatic": "pnpm --filter api db:migrate:programmatic",
     "prepare": "husky"
   },
   "devDependencies": {
