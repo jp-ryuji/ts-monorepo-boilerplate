@@ -39,16 +39,6 @@ This configuration:
 2. Uses an anonymous volume for `/app/node_modules` to isolate container dependencies
 3. Prevents binary compatibility issues between macOS and Alpine Linux
 
-### Important Note About Additional Volume Mounts
-
-Avoid creating additional anonymous volumes for subdirectories like `/app/apps/api/dist` or `/app/apps/web/.next` as this can cause file system conflicts with the bind mount of the entire project directory. This can result in errors like:
-
-```
-Error EBUSY: resource busy or locked, rmdir '/app/apps/api/dist'
-```
-
-The single anonymous volume for `/app/node_modules` is sufficient for isolating dependencies while maintaining proper file system access for build artifacts and other generated files.
-
 ## Benefits of This Approach
 
 1. **Cross-Platform Compatibility**: Works reliably between macOS development and Alpine Linux containers
@@ -77,16 +67,6 @@ When adding new packages:
    ```
 
 3. No need to rebuild containers for dependency changes
-
-### Troubleshooting
-
-If you encounter an `EBUSY: resource busy or locked` error, check your volume configuration in `compose.dev.yml`. Ensure you're not creating additional anonymous volumes for subdirectories like `/app/apps/api/dist` or `/app/apps/web/.next`. The configuration should only include:
-
-```yaml
-volumes:
-  - .:/app
-  - /app/node_modules
-```
 
 ## Why Not Direct node_modules Mounting?
 
