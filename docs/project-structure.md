@@ -25,6 +25,22 @@
 
 - NestJS application
 
+#### Database Layer (Drizzle ORM)
+
+```plaintext
+apps/api/
+├── src/
+│   ├── db/
+│   │   ├── index.ts         # Database connection
+│   │   ├── migrate.ts       # Programmatic migration script
+│   │   └── schema/          # Schema definitions
+│   │       └── index.ts     # All schemas
+├── drizzle/                 # Generated migrations
+└── drizzle.config.ts        # Drizzle configuration
+```
+
+The API uses Drizzle ORM for database operations with PostgreSQL.
+
 ### Web Service (`apps/web/`)
 
 - Next.js application

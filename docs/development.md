@@ -115,3 +115,33 @@ Or build individual services:
 pnpm build:api
 pnpm build:web
 ```
+
+## Database Management
+
+This project uses Drizzle ORM for database management. The following scripts are available for database operations:
+
+Define your database schema in: `src/db/schema/index.ts`
+
+Generate new migration files based on schema changes:
+
+```bash
+pnpm db:generate
+```
+
+Apply migrations using Drizzle Kit:
+
+```bash
+pnpm db:migrate
+```
+
+Apply migrations programmatically:
+
+```bash
+pnpm db:migrate:programmatic
+```
+
+Open Drizzle Studio to inspect the database:
+
+```bash
+pnpm db:studio
+```
