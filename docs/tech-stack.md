@@ -3,7 +3,7 @@
 ## Core Technologies
 
 - **Monorepo**: [pnpm workspaces](https://pnpm.io/workspaces)
-- **Backend**: [NestJS](https://nestjs.com/) (Node.js/TypeScript)
+- **Backend**: [NestJS](https://nestjs.com/) with [Fastify](https://fastify.io/) (Node.js/TypeScript)
 - **Frontend**: [Next.js](https://nextjs.org/) (React/TypeScript)
 - **Database**: [PostgreSQL](https://www.postgresql.org/)
 - **Caching**: [Redis](https://redis.io/)
