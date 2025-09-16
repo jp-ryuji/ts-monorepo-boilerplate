@@ -1,6 +1,6 @@
 # Deployment
 
-*This doc is imcomplete*
+*This doc is imcomplete as no Dockerfile and compose.prod.yml provided*
 
 ## Production Deployment with Docker
 

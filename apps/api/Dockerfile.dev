@@ -1,0 +1,31 @@
+# ---- Base ----
+FROM node:24-alpine AS base
+
+RUN apk add --no-cache curl
+RUN corepack enable && corepack prepare pnpm@10.16.1 --activate
+
+WORKDIR /app
+
+# ---- Dependencies ----
+FROM base AS deps
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/api/package.json apps/api/
+
+# Install only dependencies for the API app
+RUN pnpm install --filter api --frozen-lockfile
+
+# ---- Development ----
+FROM deps AS development
+
+# Copy only the API app directory
+COPY apps/api apps/api
+# Copy root configs if needed by the app
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# Copy any shared packages if they exist
+# COPY packages packages
+
+WORKDIR /app/apps/api
+
+EXPOSE 3000
+
+CMD ["pnpm", "run", "start:dev"]
