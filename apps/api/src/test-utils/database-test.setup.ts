@@ -3,6 +3,7 @@ import {
   PostgreSqlContainer,
   type StartedPostgreSqlContainer,
 } from '@testcontainers/postgresql';
+import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 import * as schema from '../db/schema';
@@ -10,7 +11,7 @@ import * as schema from '../db/schema';
 export class DatabaseTestSetup {
   private container: StartedPostgreSqlContainer;
   private client: postgres.Sql;
-  public db: ReturnType<typeof drizzle>;
+  public db: PostgresJsDatabase<typeof schema>;
 
   async setup(): Promise<void> {
     this.container = await new PostgreSqlContainer('postgres:17')
