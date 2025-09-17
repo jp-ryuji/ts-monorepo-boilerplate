@@ -55,9 +55,13 @@ pnpm add <package> --filter <workspace>
 # Add a development dependency
 pnpm add -D <package> --filter <workspace>
 
+# Add a dependency shared across all workspaces
+pnpm add -w <package>
+
 # Examples:
 pnpm add lodash --filter api
 pnpm add -D @types/lodash --filter web
+pnpm add -w zod  # Shared dependency
 ```
 
 After adding new dependencies, synchronize them with Docker containers:
