@@ -7,8 +7,10 @@ The API service uses Vitest as the testing framework with the following configur
 ### Test Types
 
 1. **Unit Tests**: Test individual functions and classes in isolation
-2. **Integration Tests**: Test the interaction between different modules
+2. **Integration Tests**: Test the interaction between different modules with real database connections
 3. **End-to-End (E2E) Tests**: Test the complete API endpoints
+
+For detailed information about integration testing, see [Integration Testing](integration-testing.md).
 
 ### Test Structure
 
@@ -211,6 +213,7 @@ You may notice that there are still Jest-related dependencies in the `pnpm-lock.
 4. **Tooling Requirements**: The NestJS CLI and related tooling may still require these dependencies for their internal functionality
 
 These dependencies include:
+
 - `jest` and related packages
 - `@types/jest` for TypeScript type definitions
 - `ts-jest` for TypeScript support in Jest
