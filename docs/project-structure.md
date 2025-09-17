@@ -6,12 +6,8 @@
 /
 ├── apps/
 │   ├── api/              # NestJS backend API
-│   │   └── Dockerfile.dev # API development Dockerfile
 │   └── web/              # Next.js frontend
-│       └── Dockerfile.dev # Web development Dockerfile
-├── docker/
-│   ├── postgres/         # PostgreSQL initialization scripts
-│   └── redis/            # Redis configuration
+├── docker/               # Docker configurations
 ├── packages/             # Shared packages (currently empty)
 ├── compose.dev.yml       # Docker Compose for development
 ├── package.json          # Root package.json with workspace scripts

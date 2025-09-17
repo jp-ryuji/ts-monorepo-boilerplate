@@ -21,14 +21,19 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "db:migrate:programmatic": "tsx src/db/migrate.ts"
+    "db:migrate:programmatic": "tsx src/db/migrate.ts",
+    "test:swagger": "ts-node src/test-swagger.ts"
   },
   "dependencies": {
+    "@fastify/swagger": "^9.5.1",
+    "@fastify/swagger-ui": "^5.2.3",
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
-    "@nestjs/platform-fastify": "^11.0.1",
+    "@nestjs/platform-fastify": "^11.1.6",
+    "@nestjs/swagger": "^11.2.0",
     "drizzle-orm": "^0.44.5",
     "postgres": "^3.4.7",
+    "redis": "^5.8.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },

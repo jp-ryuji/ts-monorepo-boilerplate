@@ -1,6 +1,6 @@
-# TS Monorepo Boilerplate
+# TypeScript Monorepo Boilerplate
 
-A monorepo boilerplate for TypeScript applications with NestJS API and Next.js frontend, using Docker for containerization and pnpm for package management.
+A modern TypeScript monorepo boilerplate with NestJS API and Next.js web application.
 
 ## Documentation
 
@@ -16,3 +16,5 @@ Find detailed documentation in the [docs/](docs/) folder:
 - [Deployment](docs/deployment.md) - Deployment procedures
 - [pnpm Monorepo with Docker](docs/pnpm-docker.md) - How pnpm works with Docker
 - [Linting and Formatting](docs/linting-and-formatting.md) - Code style standards and usage
+- [API Documentation](docs/api.md) - General API information and usage
+- [API Health Check Endpoints](docs/api-health-checks.md) - Detailed information about health check endpoints
