@@ -17,6 +17,7 @@
     "test": "pnpm --filter api test && pnpm --filter web test",
     "test:api": "pnpm --filter api test",
     "test:web": "pnpm --filter web test",
+    "test:api:integration": "pnpm --filter api test:integration",
     "test:watch": "concurrently \"pnpm --filter api test:watch\" \"pnpm --filter web test:watch\"",
     "test:api:watch": "pnpm --filter api test:watch",
     "test:e2e": "pnpm --filter api test:e2e",
@@ -37,6 +38,7 @@
     "db:migrate": "pnpm --filter api db:migrate",
     "db:studio": "pnpm --filter api db:studio",
     "db:migrate:programmatic": "pnpm --filter api db:migrate:programmatic",
+    "db:test:migrate": "sh ./scripts/migrate-test-db.sh",
     "prepare": "husky"
   },
   "devDependencies": {
