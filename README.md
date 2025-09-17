@@ -6,9 +6,8 @@ A modern TypeScript monorepo boilerplate with NestJS API and Next.js web applica
 
 Find detailed documentation in the [docs/](docs/) folder:
 
-- [Project Overview](docs/overview.md) - High-level project description and features
-- [Project Structure](docs/project-structure.md) - Detailed directory structure and organization
 - [Tech Stack](docs/tech-stack.md) - Technologies used in the project
+- [Project Structure](docs/project-structure.md) - Detailed directory structure and organization
 - [Getting Started](docs/getting-started.md) - Installation and environment setup
 - [Development Workflow](docs/development.md) - Development processes and workflows
 - [Available Scripts](docs/scripts.md) - All available pnpm commands

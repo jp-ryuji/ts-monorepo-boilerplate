@@ -66,5 +66,8 @@
     "pnpm"
   ],
   "author": "Your Name",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^4.1.9"
+  }
 }
