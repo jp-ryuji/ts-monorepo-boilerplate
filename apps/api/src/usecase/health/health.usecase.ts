@@ -1,9 +1,9 @@
-import { db } from '@db';
+import { db } from '@infrastructure/postgres';
 import { Injectable } from '@nestjs/common';
 import { createClient } from 'redis';
 
 @Injectable()
-export class HealthService {
+export class HealthUsecase {
   /**
    * Shallow health check - just returns 200, minimal dependencies
    * @returns Health check result

@@ -20,6 +20,7 @@ Find detailed documentation in the [docs/](docs/) folder:
 
 ### API
 
+- [Software Architecture](docs/api-software-architecture.md) - Detailed explanation of the API's architecture patterns
 - [Integration Testing](docs/integration-testing.md) - How to run and write integration tests
 - [Test Data Factories](docs/test-data-factories.md) - How to use the test data factory pattern
 - [API Documentation](docs/api.md) - General API information and usage

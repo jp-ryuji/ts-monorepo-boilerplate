@@ -12,7 +12,9 @@ export const posts = pgTable('posts', {
   id: varchar('id', { length: 26 }).primaryKey(), // ULID length is 26 characters
   title: text('title').notNull(),
   content: text('content'),
-  userId: varchar('user_id', { length: 26 }).references(() => users.id),
+  userId: varchar('user_id', { length: 26 })
+    .references(() => users.id)
+    .notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

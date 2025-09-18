@@ -1,5 +1,5 @@
+import type * as schema from '@infrastructure/postgres/schema';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import type * as schema from '../db/schema';
 import { PostFactory } from './factories/post.factory';
 import { UserFactory } from './factories/user.factory';
 

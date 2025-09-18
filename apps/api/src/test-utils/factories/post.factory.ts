@@ -1,19 +1,11 @@
+import { faker } from '@faker-js/faker';
+import type * as schema from '@infrastructure/postgres/schema';
+import { posts } from '@infrastructure/postgres/schema';
 import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { ulid } from 'ulid';
-import type * as schema from '../../db/schema';
-import { posts } from '../../db/schema';
+import { Post } from '../../domain/post/post.entity';
 import type { BaseFactory } from './base.factory';
 import type { UserFactory } from './user.factory';
-import { sequence } from './utils';
-
-export interface Post {
-  id: string;
-  title: string;
-  content: string | null;
-  userId: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
 
 export class PostFactory implements BaseFactory<Post> {
   constructor(
@@ -21,61 +13,90 @@ export class PostFactory implements BaseFactory<Post> {
     private readonly userFactory: UserFactory,
   ) {}
 
-  build(params?: Partial<Post>): Post {
+  build(params?: Partial<Record<string, any>>): Post {
     const now = new Date();
-    const defaults: Post = {
+    // Create default post props
+    const defaultProps = {
       id: ulid(),
-      title: `Test Post ${sequence.next('post')}`,
-      content: `This is the content for test post ${sequence.next('post')}`,
+      title: faker.lorem.sentence(),
+      content: faker.lorem.paragraph(),
       userId: '', // Will be set when creating or passed in params
       createdAt: now,
       updatedAt: now,
     };
-    return { ...defaults, ...params };
+
+    // Merge with provided params
+    const mergedProps = { ...defaultProps, ...params };
+
+    // Create post from merged props
+    return new Post(mergedProps as any);
   }
 
-  buildList(num: number, params?: Partial<Post>): Post[] {
+  buildList(num: number, params?: Partial<Record<string, any>>): Post[] {
     if (num <= 0) return [];
     return Array.from({ length: num }, () => this.build(params));
   }
 
-  async create(params?: Partial<Post>): Promise<Post> {
+  async create(params?: Partial<Record<string, any>>): Promise<Post> {
     let userId = params?.userId;
 
     // If no userId provided, create a user first
     if (!userId) {
       const user = await this.userFactory.create();
-      userId = user.id;
+      userId = user.getId();
     }
 
     const post = this.build({ ...params, userId });
 
-    // Include the id in the insert since we're generating ULIDs in the factory
-    const [createdPost] = await this.db.insert(posts).values(post).returning();
-    return { ...createdPost, userId: createdPost.userId || userId };
+    // Save to database using raw query for factory purposes
+    const postData = post.toPersistence();
+    const [createdPost] = await this.db
+      .insert(posts)
+      .values(postData)
+      .returning();
+    return new Post({
+      id: createdPost.id,
+      title: createdPost.title,
+      content: createdPost.content,
+      userId: createdPost.userId,
+      createdAt: createdPost.createdAt,
+      updatedAt: createdPost.updatedAt,
+    });
   }
 
-  async createList(num: number, params?: Partial<Post>): Promise<Post[]> {
+  async createList(
+    num: number,
+    params?: Partial<Record<string, any>>,
+  ): Promise<Post[]> {
     if (num <= 0) return [];
 
     // If no userId provided, create a user first for all posts
     let userId = params?.userId;
     if (!userId) {
       const user = await this.userFactory.create();
-      userId = user.id;
+      userId = user.getId();
     }
 
     const postsToCreate = Array.from({ length: num }, () => {
       return this.build({ ...params, userId });
     });
 
+    const postData = postsToCreate.map((post) => post.toPersistence());
     const createdPosts = await this.db
       .insert(posts)
-      .values(postsToCreate)
+      .values(postData)
       .returning();
-    return createdPosts.map((post) => ({
-      ...post,
-      userId: post.userId || userId,
-    }));
+
+    return createdPosts.map(
+      (createdPost) =>
+        new Post({
+          id: createdPost.id,
+          title: createdPost.title,
+          content: createdPost.content,
+          userId: createdPost.userId,
+          createdAt: createdPost.createdAt,
+          updatedAt: createdPost.updatedAt,
+        }),
+    );
   }
 }

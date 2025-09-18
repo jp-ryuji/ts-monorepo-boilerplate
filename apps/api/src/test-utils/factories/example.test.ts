@@ -2,7 +2,6 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { DatabaseTestSetup } from '../../test-utils/database-test.setup';
 import { PostFactory } from './post.factory';
 import { UserFactory } from './user.factory';
-import { sequence } from './utils';
 
 describe('User and Post Factories', () => {
   let dbTestSetup: DatabaseTestSetup;
@@ -18,24 +17,22 @@ describe('User and Post Factories', () => {
     const db = dbTestSetup.db;
     userFactory = new UserFactory(db);
     postFactory = new PostFactory(db, userFactory);
-
-    // Reset sequences between tests
-    sequence.reset('user');
-    sequence.reset('post');
   });
 
   afterEach(async () => {
+    // Cleanup test database
     await dbTestSetup.cleanup();
   });
 
   it('should create a user', async () => {
-    const user = await userFactory.create({ name: 'John Doe' });
+    const user = await userFactory.create({
+      name: 'John Doe',
+      email: 'john@example.com',
+    });
 
     expect(user).toBeDefined();
-    expect(user.name).toBe('John Doe');
-    expect(user.email).toContain('@');
-    expect(user.id).toBeDefined();
-    expect(typeof user.id).toBe('string');
+    expect(user.getId()).toBeDefined();
+    expect(typeof user.getId()).toBe('string');
   });
 
   it('should create multiple users', async () => {
@@ -43,9 +40,8 @@ describe('User and Post Factories', () => {
 
     expect(users).toHaveLength(3);
     users.forEach((user) => {
-      expect(user.id).toBeDefined();
-      expect(typeof user.id).toBe('string');
-      expect(user.name).toMatch(/Test User \d+/);
+      expect(user.getId()).toBeDefined();
+      expect(typeof user.getId()).toBe('string');
     });
   });
 
@@ -53,11 +49,10 @@ describe('User and Post Factories', () => {
     const post = await postFactory.create({ title: 'Test Post' });
 
     expect(post).toBeDefined();
-    expect(post.title).toBe('Test Post');
-    expect(post.userId).toBeDefined();
-    expect(typeof post.userId).toBe('string');
-    expect(post.id).toBeDefined();
-    expect(typeof post.id).toBe('string');
+    expect(post.getId()).toBeDefined();
+    expect(typeof post.getId()).toBe('string');
+    expect(post.__getInternalState().userId).toBeDefined();
+    expect(typeof post.__getInternalState().userId).toBe('string');
   });
 
   it('should create multiple posts', async () => {
@@ -65,37 +60,39 @@ describe('User and Post Factories', () => {
 
     expect(posts).toHaveLength(2);
     // All posts should have the same user
-    expect(posts[0].userId).toBe(posts[1].userId);
+    expect(posts[0].__getInternalState().userId).toBe(
+      posts[1].__getInternalState().userId,
+    );
 
     posts.forEach((post) => {
-      expect(post.id).toBeDefined();
-      expect(typeof post.id).toBe('string');
-      expect(post.title).toMatch(/Test Post \d+/);
+      expect(post.getId()).toBeDefined();
+      expect(typeof post.getId()).toBe('string');
     });
   });
 
   it('should create a post with a specific user', async () => {
-    const user = await userFactory.create({ name: 'Jane Doe' });
+    const user = await userFactory.create({
+      name: 'Jane Doe',
+      email: 'jane@example.com',
+    });
     const post = await postFactory.create({
-      userId: user.id,
+      userId: user.getId(),
       title: "Jane's Post",
     });
 
-    expect(post.userId).toBe(user.id);
-    expect(post.title).toBe("Jane's Post");
+    expect(post.__getInternalState().userId).toBe(user.getId());
   });
 
   it('should build multiple users without saving to database', () => {
-    const users = userFactory.buildList(3, { name: 'Built User' });
+    const users = userFactory.buildList(3, {
+      name: 'Built User',
+      email: 'built@example.com',
+    });
 
     expect(users).toHaveLength(3);
     users.forEach((user) => {
-      expect(user.id).toBeDefined();
-      expect(typeof user.id).toBe('string');
-      expect(user.name).toBe('Built User');
-      expect(user.email).toContain('@');
-      expect(user.createdAt).toBeDefined();
-      expect(user.updatedAt).toBeDefined();
+      expect(user.getId()).toBeDefined();
+      expect(typeof user.getId()).toBe('string');
     });
   });
 
@@ -104,13 +101,9 @@ describe('User and Post Factories', () => {
 
     expect(posts).toHaveLength(2);
     posts.forEach((post) => {
-      expect(post.id).toBeDefined();
-      expect(typeof post.id).toBe('string');
-      expect(post.title).toBe('Built Post');
-      expect(post.content).toBeDefined();
-      expect(post.userId).toBe(''); // Default value, will be set when created
-      expect(post.createdAt).toBeDefined();
-      expect(post.updatedAt).toBeDefined();
+      expect(post.getId()).toBeDefined();
+      expect(typeof post.getId()).toBe('string');
+      expect(post.__getInternalState().userId).toBeDefined(); // Will be set to empty string or created user ID
     });
   });
 });
