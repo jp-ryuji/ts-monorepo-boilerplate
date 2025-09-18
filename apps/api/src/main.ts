@@ -12,6 +12,9 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
+  // Set global prefix for all routes
+  app.setGlobalPrefix('api');
+
   await setupSwagger(app);
 
   await app.listen(process.env.PORT ?? 3000, '0.0.0.0');

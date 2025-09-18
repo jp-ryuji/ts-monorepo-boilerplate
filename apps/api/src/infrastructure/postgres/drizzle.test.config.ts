@@ -1,8 +1,8 @@
 import type { Config } from 'drizzle-kit';
 
 export default {
-  schema: './src/db/schema/index.ts',
-  out: './drizzle',
+  schema: './src/infrastructure/postgres/schema/index.ts',
+  out: './src/infrastructure/postgres/drizzle',
   dialect: 'postgresql',
   dbCredentials: {
     host: process.env.TEST_DB_HOST || 'localhost',

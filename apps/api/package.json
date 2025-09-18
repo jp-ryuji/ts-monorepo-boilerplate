@@ -20,13 +20,14 @@
     "test:e2e": "vitest run --config ./test/vitest-e2e.config.mjs",
     "test:ui": "vitest --ui",
     "lint": "biome check src/ test/",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio",
+    "db:generate": "drizzle-kit generate --config=src/infrastructure/postgres/drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config=src/infrastructure/postgres/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config=src/infrastructure/postgres/drizzle.config.ts",
     "db:migrate:programmatic": "tsx src/db/migrate.ts",
     "test:swagger": "ts-node src/test-swagger.ts"
   },
   "dependencies": {
+    "@faker-js/faker": "^10.0.0",
     "@fastify/swagger": "^9.5.1",
     "@fastify/swagger-ui": "^5.2.3",
     "@nestjs/common": "^11.0.1",
@@ -37,7 +38,8 @@
     "postgres": "^3.4.7",
     "redis": "^5.8.2",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "ulid": "^3.0.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.0",

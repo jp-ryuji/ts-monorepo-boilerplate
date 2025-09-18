@@ -15,8 +15,9 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
-      "@db": ["./src/db"],
-      "@db/*": ["./src/db/*"]
+      "@domain/*": ["./src/domain/*"],
+      "@usecase/*": ["./src/usecase/*"],
+      "@infrastructure/*": ["./src/infrastructure/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

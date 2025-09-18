@@ -10,8 +10,10 @@ export const setupSwagger = async (app: NestFastifyApplication) => {
     .setTitle('API Documentation')
     .setDescription('API documentation for the application')
     .setVersion('1.0')
-    .addTag('health')
-    .addTag('app')
+    .addTag('health', 'Health check endpoints')
+    .addTag('users', 'User management endpoints')
+    .addTag('posts', 'Post management endpoints')
+    .addTag('app', 'Application endpoints')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

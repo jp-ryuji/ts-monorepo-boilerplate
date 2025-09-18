@@ -1,16 +1,17 @@
 import { execSync } from 'node:child_process';
+import * as schema from '@infrastructure/postgres/schema';
 import {
   PostgreSqlContainer,
   type StartedPostgreSqlContainer,
 } from '@testcontainers/postgresql';
+import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
-import * as schema from '../db/schema';
 
 export class DatabaseTestSetup {
   private container: StartedPostgreSqlContainer;
   private client: postgres.Sql;
-  public db: ReturnType<typeof drizzle>;
+  public db: PostgresJsDatabase<typeof schema>;
 
   async setup(): Promise<void> {
     this.container = await new PostgreSqlContainer('postgres:17')
@@ -37,10 +38,13 @@ export class DatabaseTestSetup {
     // because the config file uses fixed values for these
 
     // Run drizzle-kit push command with the existing config file
-    execSync('npx drizzle-kit push --config=drizzle.test.config.ts', {
-      cwd: process.cwd(),
-      stdio: 'inherit',
-    });
+    execSync(
+      'npx drizzle-kit push --config=src/infrastructure/postgres/drizzle.test.config.ts',
+      {
+        cwd: process.cwd(),
+        stdio: 'inherit',
+      },
+    );
   }
 
   async cleanup(): Promise<void> {
