@@ -25,7 +25,6 @@
     "lint:api": "pnpm --filter api lint",
     "lint:web": "pnpm --filter web lint",
     "lint:fix": "biome check --write .",
-    "lint-staged": "lint-staged",
     "clean": "rimraf apps/*/dist apps/*/node_modules node_modules",
     "clean:api": "rimraf apps/api/dist apps/api/node_modules",
     "clean:web": "rimraf apps/web/.next apps/web/node_modules",
@@ -39,13 +38,12 @@
     "db:studio": "pnpm --filter api db:studio",
     "db:migrate:programmatic": "pnpm --filter api db:migrate:programmatic",
     "db:test:migrate": "sh ./scripts/migrate-test-db.sh",
-    "prepare": "husky"
+    "prepare": "lefthook install"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.3",
     "concurrently": "^9.2.1",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.1.6",
+    "lefthook": "^1.13.1",
     "rimraf": "^6.0.1"
   },
   "engines": {
