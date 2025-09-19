@@ -4,7 +4,7 @@ import { USER_REPOSITORY } from '@domain/user/user.repository';
 import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()
-export class UserUsecase {
+export class UserService {
   constructor(
     @Inject(USER_REPOSITORY)
     private readonly userRepository: UserRepository,

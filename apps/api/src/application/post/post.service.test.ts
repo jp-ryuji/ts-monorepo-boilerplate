@@ -1,10 +1,10 @@
 import { Post } from '@domain/post/post.entity';
 import type { PostRepository } from '@domain/post/post.repository';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { PostUsecase } from './post.usecase';
+import { PostService } from './post.service';
 
-describe('PostUsecase', () => {
-  let postUsecase: PostUsecase;
+describe('PostService', () => {
+  let postService: PostService;
   let mockPostRepository: PostRepository;
 
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('PostUsecase', () => {
       delete: vi.fn(),
     };
 
-    postUsecase = new PostUsecase(mockPostRepository);
+    postService = new PostService(mockPostRepository);
   });
 
   describe('createPost', () => {
@@ -39,7 +39,7 @@ describe('PostUsecase', () => {
       vi.mocked(mockPostRepository.create).mockResolvedValue(createdPost);
 
       // Act
-      const result = await postUsecase.createPost(title, content, userId);
+      const result = await postService.createPost(title, content, userId);
 
       // Assert
       expect(result).toEqual(createdPost);
@@ -69,7 +69,7 @@ describe('PostUsecase', () => {
       vi.mocked(mockPostRepository.findById).mockResolvedValue(mockPost);
 
       // Act
-      const result = await postUsecase.getPostById(postId);
+      const result = await postService.getPostById(postId);
 
       // Assert
       expect(result).toEqual(mockPost);
@@ -83,7 +83,7 @@ describe('PostUsecase', () => {
       vi.mocked(mockPostRepository.findById).mockResolvedValue(null);
 
       // Act
-      const result = await postUsecase.getPostById(postId);
+      const result = await postService.getPostById(postId);
 
       // Assert
       expect(result).toBeNull();
@@ -112,7 +112,7 @@ describe('PostUsecase', () => {
       vi.mocked(mockPostRepository.findAll).mockResolvedValue(mockPosts);
 
       // Act
-      const result = await postUsecase.getAllPosts();
+      const result = await postService.getAllPosts();
 
       // Assert
       expect(result).toEqual(mockPosts);
@@ -142,7 +142,7 @@ describe('PostUsecase', () => {
       vi.mocked(mockPostRepository.findByUserId).mockResolvedValue(mockPosts);
 
       // Act
-      const result = await postUsecase.getPostsByUserId(userId);
+      const result = await postService.getPostsByUserId(userId);
 
       // Assert
       expect(result).toEqual(mockPosts);

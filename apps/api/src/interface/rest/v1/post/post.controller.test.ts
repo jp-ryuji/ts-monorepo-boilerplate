@@ -1,27 +1,27 @@
+import type { PostService } from '@application/post/post.service';
 import { Post } from '@domain/post/post.entity';
-import type { PostUsecase } from '@usecase/post/post.usecase';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { CreatePostDto } from './dto/create-post.dto';
 import { PostController } from './post.controller';
 
 describe('PostController', () => {
   let postController: PostController;
-  let mockPostUsecase: PostUsecase;
+  let mockPostService: PostService;
 
   beforeEach(() => {
-    // Create mock usecase
-    mockPostUsecase = {
+    // Create mock service
+    mockPostService = {
       createPost: vi.fn(),
       getPostById: vi.fn(),
       getAllPosts: vi.fn(),
       getPostsByUserId: vi.fn(),
-    } as unknown as PostUsecase;
+    } as unknown as PostService;
 
-    postController = new PostController(mockPostUsecase);
+    postController = new PostController(mockPostService);
   });
 
   describe('createPost', () => {
-    it('should create and return post from usecase', async () => {
+    it('should create and return post from service', async () => {
       // Arrange
       const createPostDto: CreatePostDto = {
         title: 'New Post',
@@ -35,14 +35,14 @@ describe('PostController', () => {
         userId: createPostDto.userId,
       });
 
-      vi.mocked(mockPostUsecase.createPost).mockResolvedValue(createdPost);
+      vi.mocked(mockPostService.createPost).mockResolvedValue(createdPost);
 
       // Act
       const result = await postController.createPost(createPostDto);
 
       // Assert
       expect(result).toEqual(createdPost);
-      expect(mockPostUsecase.createPost).toHaveBeenCalledWith(
+      expect(mockPostService.createPost).toHaveBeenCalledWith(
         createPostDto.title,
         createPostDto.content,
         createPostDto.userId,
@@ -51,7 +51,7 @@ describe('PostController', () => {
   });
 
   describe('getPost', () => {
-    it('should return post from usecase', async () => {
+    it('should return post from service', async () => {
       // Arrange
       const postId = 'post123';
       const mockPost = new Post({
@@ -61,19 +61,19 @@ describe('PostController', () => {
         userId: 'user123',
       });
 
-      vi.mocked(mockPostUsecase.getPostById).mockResolvedValue(mockPost);
+      vi.mocked(mockPostService.getPostById).mockResolvedValue(mockPost);
 
       // Act
       const result = await postController.getPost(postId);
 
       // Assert
       expect(result).toEqual(mockPost);
-      expect(mockPostUsecase.getPostById).toHaveBeenCalledWith(postId);
+      expect(mockPostService.getPostById).toHaveBeenCalledWith(postId);
     });
   });
 
   describe('getAllPosts', () => {
-    it('should return all posts from usecase', async () => {
+    it('should return all posts from service', async () => {
       // Arrange
       const mockPosts = [
         new Post({
@@ -90,19 +90,19 @@ describe('PostController', () => {
         }),
       ];
 
-      vi.mocked(mockPostUsecase.getAllPosts).mockResolvedValue(mockPosts);
+      vi.mocked(mockPostService.getAllPosts).mockResolvedValue(mockPosts);
 
       // Act
       const result = await postController.getAllPosts();
 
       // Assert
       expect(result).toEqual(mockPosts);
-      expect(mockPostUsecase.getAllPosts).toHaveBeenCalledTimes(1);
+      expect(mockPostService.getAllPosts).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('getPostsByUser', () => {
-    it('should return user posts from usecase', async () => {
+    it('should return user posts from service', async () => {
       // Arrange
       const userId = 'user123';
       const mockPosts = [
@@ -120,14 +120,14 @@ describe('PostController', () => {
         }),
       ];
 
-      vi.mocked(mockPostUsecase.getPostsByUserId).mockResolvedValue(mockPosts);
+      vi.mocked(mockPostService.getPostsByUserId).mockResolvedValue(mockPosts);
 
       // Act
       const result = await postController.getPostsByUser(userId);
 
       // Assert
       expect(result).toEqual(mockPosts);
-      expect(mockPostUsecase.getPostsByUserId).toHaveBeenCalledWith(userId);
+      expect(mockPostService.getPostsByUserId).toHaveBeenCalledWith(userId);
     });
   });
 });

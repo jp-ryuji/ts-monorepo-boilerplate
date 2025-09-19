@@ -1,16 +1,16 @@
 import { describe, expect, it } from 'vitest';
-import { HealthUsecase } from './health.usecase';
+import { HealthService } from './health.service';
 
-describe('HealthUsecase', () => {
-  let healthUsecase: HealthUsecase;
+describe('HealthService', () => {
+  let healthService: HealthService;
 
   beforeEach(() => {
-    healthUsecase = new HealthUsecase();
+    healthService = new HealthService();
   });
 
   describe('shallowCheck', () => {
     it('should return health check result with status ok', () => {
-      const result = healthUsecase.shallowCheck();
+      const result = healthService.shallowCheck();
 
       expect(result).toEqual({
         status: 'ok',
@@ -23,9 +23,9 @@ describe('HealthUsecase', () => {
     });
 
     it('should return different timestamps for different calls', () => {
-      const result1 = healthUsecase.shallowCheck();
+      const result1 = healthService.shallowCheck();
       // Add a small delay to ensure different timestamps
-      const result2 = healthUsecase.shallowCheck();
+      const result2 = healthService.shallowCheck();
 
       expect(result1.timestamp).toBeDefined();
       expect(result2.timestamp).toBeDefined();
@@ -34,7 +34,7 @@ describe('HealthUsecase', () => {
 
   describe('detailedCheck', () => {
     it('should return detailed health check result', async () => {
-      const result = await healthUsecase.detailedCheck();
+      const result = await healthService.detailedCheck();
 
       expect(result).toEqual({
         status: expect.any(String),

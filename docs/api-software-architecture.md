@@ -1,30 +1,20 @@
 # Software Architecture
 
-This project follows the Onion Architecture pattern with Domain-Driven Design (DDD) principles. This pattern, along with Clean Architecture and Hexagonal Architecture, shares common principles of separation of concerns and dependency inversion, though each has its own emphasis:
-
-- **Onion Architecture** focuses on layers with dependencies pointing inward toward the domain core
-- **Clean Architecture** emphasizes dependency rules where inner layers should not depend on outer layers
-- **Hexagonal Architecture** emphasizes defining interfaces (ports) at the system boundaries and implementing adapters for external systems
-
-All these patterns promote loose coupling between the application core and external systems.
+This project follows a Domain-Driven Design (DDD) approach with an Onion Architecture structure. This pattern emphasizes separation of concerns and dependency inversion, with dependencies pointing inward toward the domain core.
 
 In this architecture:
 
 - The **core domain** (business logic) resides at the center and is independent of external systems
-- **Ports** are interfaces defined in the core that allow communication with external systems
-- **Adapters** are implementations of those ports that connect to external systems (databases, HTTP APIs, etc.)
+- **Domain entities** represent the core business objects with identity
+- **Value objects** are immutable objects that describe aspects of the domain
+- **Repository interfaces** define the contracts for data access (ports)
+- **Application services** orchestrate use cases and business flows
+- **DTOs** (Data Transfer Objects) carry data between processes
+- **Adapters** come in two types:
+  - **Secondary/Driven Adapters**: Implementations of repository interfaces that connect to external systems (databases, message queues, etc.)
+  - **Primary/Driving Adapters**: Interface adapters that expose application functionality to external clients (gRPC services, HTTP handlers, etc.)
 
-## Core Concept
-
-The application is structured around three primary layers:
-
-1. **Domain Layer** - Pure business logic and entities
-2. **Application Layer** - Use cases that orchestrate domain logic
-3. **Infrastructure Layer** - Technical implementations (database, HTTP, etc.)
-
-This separation ensures that business logic remains independent of technical concerns.
-
-## Project Structure
+## Project Structure (API)
 
 ```plaintext
 apps/api/
@@ -36,10 +26,11 @@ apps/api/
     │   │   ├── user.entity.ts     # User entity with business rules
     │   │   └── user.repository.ts # Repository interface (port)
     │   └── post/                  # Post bounded context
-    ├── usecase/                   # Application use cases
-    └── infrastructure/            # Technical implementations
-        ├── postgres/              # PostgreSQL database adapters
-        │   └── repository/        # Repository implementations (adapters)
+    ├── application/               # Application services (orchestration)
+    ├── infrastructure/            # Technical implementations
+    │   ├── postgres/              # PostgreSQL database adapters
+    │   │   └── repository/        # Repository implementations
+    └── interface/                 # Interface Adapters
         └── rest/                  # HTTP API adapters
             └── v1/                # API version 1 controllers and modules
 ```
@@ -59,15 +50,17 @@ This layer is completely framework-agnostic and has no external dependencies.
 
 **Persistence Mapping**: Domain entities include `fromPersistence()` and `toPersistence()` methods for converting between domain objects and persistence representations. This approach keeps simple mapping logic close to the entity while more complex transformations can be handled in infrastructure layer mappers.
 
-### 2. Application Layer (Use Cases)
+### 2. Application Layer (Services)
 
 Contains application-specific business logic:
 
-- **Use Cases**: Implementation of specific business operations
+- **Services**: Implementation of specific business operations (orchestration)
 - **DTOs**: Data Transfer Objects for input/output boundaries
 - **Application Services**: Coordination of domain objects and external services
 
 This layer depends only on the domain layer and defines the application's capabilities.
+
+Files in this layer use the `*.service.ts` naming convention.
 
 ### 3. Infrastructure Layer (Adapters)
 
@@ -80,15 +73,15 @@ Contains technical implementations:
 
 This layer depends on both domain and application layers.
 
-### 4. Presentation Layer (Interfaces)
+### 4. Presentation Layer (Interface)
 
-Contains user-facing interfaces:
+Contains user-facing interface:
 
 - **REST Controllers**: Handle HTTP requests and responses
 - **GraphQL Resolvers**: Handle GraphQL queries and mutations
 - **CLI Commands**: Command-line interface implementations
 
-This layer depends on the application layer and translates user input into use case execution.
+This layer depends on the application layer and translates user input into service execution.
 
 ## Key Design Principles
 
@@ -97,9 +90,9 @@ This layer depends on the application layer and translates user input into use c
 Each layer has a specific responsibility:
 
 - **Domain**: Business rules and logic
-- **Application**: Use case orchestration
+- **Application**: Service orchestration
 - **Infrastructure**: Technical implementations
-- **Presentation**: User interface concerns
+- **Presentation**: User interface concern
 
 ### 2. Dependency Inversion
 
@@ -133,7 +126,7 @@ REST controllers use Data Transfer Objects to:
 - **Separate API Contracts**: Decouple API interfaces from domain entities
 - **Enable Documentation**: Clear DTOs support API documentation generation
 
-DTOs are defined in the presentation layer and validated before being processed by use cases.
+DTOs are defined in the presentation layer and validated before being processed by services.
 
 ## Testing Strategy
 

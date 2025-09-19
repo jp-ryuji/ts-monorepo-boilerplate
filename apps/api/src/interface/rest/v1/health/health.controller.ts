@@ -1,3 +1,4 @@
+import type { HealthService } from '@application/health/health.service';
 import { Controller, Get } from '@nestjs/common';
 import {
   ApiOkResponse,
@@ -5,19 +6,18 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import type { HealthUsecase } from '@usecase/health/health.usecase';
 
 @ApiTags('health')
 @Controller('v1/health')
 export class HealthController {
-  constructor(private readonly healthUsecase: HealthUsecase) {}
+  constructor(private readonly healthService: HealthService) {}
 
   @Get()
   @ApiOperation({ summary: 'Shallow health check' })
   @ApiOkResponse({ description: 'Shallow health check passed' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   shallowCheck() {
-    return this.healthUsecase.shallowCheck();
+    return this.healthService.shallowCheck();
   }
 
   @Get('detailed')
@@ -27,6 +27,6 @@ export class HealthController {
   @ApiOkResponse({ description: 'Detailed health check completed' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
   async detailedCheck() {
-    return await this.healthUsecase.detailedCheck();
+    return await this.healthService.detailedCheck();
   }
 }

@@ -1,22 +1,22 @@
-import type { HealthUsecase } from '@usecase/health/health.usecase';
+import type { HealthService } from '@application/health/health.service';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { HealthController } from './health.controller';
 
 describe('HealthController', () => {
   let healthController: HealthController;
-  let mockHealthUsecase: HealthUsecase;
+  let mockHealthService: HealthService;
 
   beforeEach(() => {
-    mockHealthUsecase = {
+    mockHealthService = {
       shallowCheck: vi.fn(),
       detailedCheck: vi.fn(),
-    } as unknown as HealthUsecase;
+    } as unknown as HealthService;
 
-    healthController = new HealthController(mockHealthUsecase);
+    healthController = new HealthController(mockHealthService);
   });
 
   describe('shallowCheck', () => {
-    it('should return health check result from usecase', () => {
+    it('should return health check result from service', () => {
       // Arrange
       const mockResult = {
         status: 'ok',
@@ -24,19 +24,19 @@ describe('HealthController', () => {
         info: 'Shallow health check passed',
       };
 
-      vi.mocked(mockHealthUsecase.shallowCheck).mockReturnValue(mockResult);
+      vi.mocked(mockHealthService.shallowCheck).mockReturnValue(mockResult);
 
       // Act
       const result = healthController.shallowCheck();
 
       // Assert
       expect(result).toEqual(mockResult);
-      expect(mockHealthUsecase.shallowCheck).toHaveBeenCalledTimes(1);
+      expect(mockHealthService.shallowCheck).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('detailedCheck', () => {
-    it('should return detailed health check result from usecase', async () => {
+    it('should return detailed health check result from service', async () => {
       // Arrange
       const mockResult = {
         status: 'ok',
@@ -47,14 +47,14 @@ describe('HealthController', () => {
         },
       };
 
-      vi.mocked(mockHealthUsecase.detailedCheck).mockResolvedValue(mockResult);
+      vi.mocked(mockHealthService.detailedCheck).mockResolvedValue(mockResult);
 
       // Act
       const result = await healthController.detailedCheck();
 
       // Assert
       expect(result).toEqual(mockResult);
-      expect(mockHealthUsecase.detailedCheck).toHaveBeenCalledTimes(1);
+      expect(mockHealthService.detailedCheck).toHaveBeenCalledTimes(1);
     });
   });
 });
