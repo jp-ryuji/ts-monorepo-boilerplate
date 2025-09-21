@@ -9,7 +9,7 @@
 │   └── web/              # Next.js frontend
 ├── docker/               # Docker configurations
 ├── packages/             # Shared packages (currently empty)
-├── compose.dev.yml       # Docker Compose for development
+├── compose.yaml          # Docker Compose for development
 ├── package.json          # Root package.json with workspace scripts
 ├── pnpm-workspace.yaml   # pnpm workspace configuration
 └── .env.example          # Environment variables template

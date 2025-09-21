@@ -59,14 +59,14 @@ This document provides essential context for AI models interacting with this pro
   * **Workspaces:** `pnpm-workspace.yaml`
   * **Formatting/Linting:** `biome.json`
   * **Git Hooks:** `lefthook.yml`
-  * **Local Development:** `compose.dev.yml`
+  * **Local Development:** `compose.yaml`
 * **CI/CD Pipeline:**
   * `/.github/workflows/api-ci.yml`
   * `/.github/workflows/web-ci.yml`
 
 ## 6. Development & Testing Workflow
 
-* **Local Development Environment:** The project can be run locally using `pnpm dev` or via Docker using `docker compose -f compose.dev.yml up`. The Docker setup is the recommended approach for a consistent environment.
+* **Local Development Environment:** The project can be run locally using `pnpm dev` or via Docker using `docker compose up`. The Docker setup is the recommended approach for a consistent environment.
 * **Testing:**
   * **Framework:** Vitest is used for both the API and web applications.
   * **API Test Types:**
@@ -86,7 +86,7 @@ This document provides essential context for AI models interacting with this pro
 ## 7. Specific Instructions for AI Collaboration
 
 * **Contribution Guidelines:** All code MUST be formatted and linted with Biome before committing. The pre-commit hook managed by `lefthook` will enforce this. You can manually run `pnpm lint:fix` to automatically fix most issues.
-* **Infrastructure (IaC):** The project uses Docker for containerization. Modifications to `compose.dev.yml` or files in the `/docker` directory will affect the local development environment.
+* **Infrastructure (IaC):** The project uses Docker for containerization. Modifications to `compose.yaml` or files in the `/docker` directory will affect the local development environment.
 * **Security:** Do not hardcode secrets or keys. Use environment variables for all sensitive information.
 * **Dependencies:**
   * Use `pnpm add <package> --filter <workspace>` to add a dependency to a specific app (e.g., `api` or `web`).

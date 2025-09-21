@@ -88,7 +88,7 @@ The web service has its own set of scripts in `apps/web/package.json`:
    pnpm dev:web
 
    # Start PostgreSQL and Redis for local development
-   docker compose -f compose.dev.yml up -d
+   docker compose up -d
 
    # Start both services with local .env configuration
    pnpm dev:local
