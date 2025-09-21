@@ -4,7 +4,7 @@ import { POST_REPOSITORY } from '@domain/post/post.repository';
 import { Inject, Injectable } from '@nestjs/common';
 
 @Injectable()
-export class PostUsecase {
+export class PostService {
   constructor(
     @Inject(POST_REPOSITORY)
     private readonly postRepository: PostRepository,

@@ -20,8 +20,9 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, './src'),
       '@domain': resolve(__dirname, './src/domain'),
-      '@usecase': resolve(__dirname, './src/usecase'),
+      '@application': resolve(__dirname, './src/application'),
       '@infrastructure': resolve(__dirname, './src/infrastructure'),
+      '@interface': resolve(__dirname, './src/interface'),
     },
   },
 });

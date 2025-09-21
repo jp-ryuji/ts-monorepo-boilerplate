@@ -1,13 +1,13 @@
 // Example of how to use the factories in a real test
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { UserUsecase } from '../../usecase/user/user.usecase';
+import { UserService } from '../../application/user/user.service';
 import { DatabaseTestSetup } from '../database-test.setup';
 import { FactoryProvider } from '../factory-provider';
 
 describe('User Service Tests', () => {
   let dbTestSetup: DatabaseTestSetup;
   let factoryProvider: FactoryProvider;
-  let _userUsecase: UserUsecase;
+  let _userService: UserService;
 
   beforeEach(async () => {
     // Setup test database
@@ -17,9 +17,9 @@ describe('User Service Tests', () => {
     // Create factory provider
     factoryProvider = new FactoryProvider(dbTestSetup.db);
 
-    // Create usecase instance (in a real test, you would inject this)
+    // Create service instance (in a real test, you would inject this)
     // This is just for demonstration purposes
-    _userUsecase = new UserUsecase(
+    _userService = new UserService(
       /* mock repository would be injected here in a real test */ {} as any,
     );
   });
@@ -37,7 +37,7 @@ describe('User Service Tests', () => {
       email: 'john@example.com',
     });
 
-    // In a real test, you would test the actual usecase/repository methods
+    // In a real test, you would test the actual service/repository methods
     // This is just to demonstrate the factory usage
     expect(createdUser.__getInternalState().name).toBe('John Doe');
     expect(createdUser.__getInternalState().email).toBe('john@example.com');

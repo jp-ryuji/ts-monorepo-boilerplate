@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { createClient } from 'redis';
 
 @Injectable()
-export class HealthUsecase {
+export class HealthService {
   /**
    * Shallow health check - just returns 200, minimal dependencies
    * @returns Health check result

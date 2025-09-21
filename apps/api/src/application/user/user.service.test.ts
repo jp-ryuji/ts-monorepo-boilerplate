@@ -1,10 +1,10 @@
 import { User } from '@domain/user/user.entity';
 import type { UserRepository } from '@domain/user/user.repository';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { UserUsecase } from './user.usecase';
+import { UserService } from './user.service';
 
-describe('UserUsecase', () => {
-  let userUsecase: UserUsecase;
+describe('UserService', () => {
+  let userService: UserService;
   let mockUserRepository: UserRepository;
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe('UserUsecase', () => {
       delete: vi.fn(),
     };
 
-    userUsecase = new UserUsecase(mockUserRepository);
+    userService = new UserService(mockUserRepository);
   });
 
   describe('createUser', () => {
@@ -36,7 +36,7 @@ describe('UserUsecase', () => {
       vi.mocked(mockUserRepository.create).mockResolvedValue(createdUser);
 
       // Act
-      const result = await userUsecase.createUser(name, email);
+      const result = await userService.createUser(name, email);
 
       // Assert
       expect(result).toEqual(createdUser);
@@ -64,7 +64,7 @@ describe('UserUsecase', () => {
       vi.mocked(mockUserRepository.findById).mockResolvedValue(mockUser);
 
       // Act
-      const result = await userUsecase.getUserById(userId);
+      const result = await userService.getUserById(userId);
 
       // Assert
       expect(result).toEqual(mockUser);
@@ -78,7 +78,7 @@ describe('UserUsecase', () => {
       vi.mocked(mockUserRepository.findById).mockResolvedValue(null);
 
       // Act
-      const result = await userUsecase.getUserById(userId);
+      const result = await userService.getUserById(userId);
 
       // Assert
       expect(result).toBeNull();
@@ -105,7 +105,7 @@ describe('UserUsecase', () => {
       vi.mocked(mockUserRepository.findAll).mockResolvedValue(mockUsers);
 
       // Act
-      const result = await userUsecase.getAllUsers();
+      const result = await userService.getAllUsers();
 
       // Assert
       expect(result).toEqual(mockUsers);

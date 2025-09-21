@@ -16,8 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@domain/*": ["./src/domain/*"],
-      "@usecase/*": ["./src/usecase/*"],
-      "@infrastructure/*": ["./src/infrastructure/*"]
+      "@application/*": ["./src/application/*"],
+      "@infrastructure/*": ["./src/infrastructure/*"],
+      "@interface/*": ["./src/interface/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
