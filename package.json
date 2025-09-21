@@ -8,6 +8,9 @@
     "dev": "concurrently \"pnpm --filter api start:dev\" \"pnpm --filter web dev\"",
     "dev:api": "pnpm --filter api start:dev",
     "dev:web": "pnpm --filter web dev",
+    "dev:local": "concurrently \"pnpm dev:api:local\" \"pnpm dev:web:local\"",
+    "dev:api:local": "dotenv -e .env -- pnpm --filter api start:dev",
+    "dev:web:local": "dotenv -e .env -- pnpm --filter web dev",
     "build": "pnpm --filter api build && pnpm --filter web build",
     "build:api": "pnpm --filter api build",
     "build:web": "pnpm --filter web build",
@@ -43,6 +46,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.2.3",
     "concurrently": "^9.2.1",
+    "dotenv-cli": "^8.0.0",
     "lefthook": "^1.13.1",
     "rimraf": "^6.0.1"
   },

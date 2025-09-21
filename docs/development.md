@@ -4,27 +4,18 @@
 
 ### Local Development (without Docker)
 
-Start the API:
+For local development, you need to have PostgreSQL and Redis running on your local machine. You can start them using Docker Compose:
 
 ```bash
-pnpm dev:api
+# Start only PostgreSQL and Redis (not the app containers)
+docker compose -f compose.dev.yml up -d
 ```
 
-In another terminal, start the web frontend:
-
-```bash
-pnpm dev:web
-```
-
-Or start both services simultaneously:
-
-```bash
-pnpm dev
-```
+Create a `.env` file based on `.env.example` and adjust the values for local development:\n```bash\ncp .env.example .env\n```\n\nThen start the API:\n\n```bash\npnpm dev:api:local\n```\n\nIn another terminal, start the web frontend:\n\n```bash\npnpm dev:web:local\n```\n\nOr start both services simultaneously:\n\n```bash\npnpm dev:local\n```
 
 ### Docker-based Development
 
-Start all services:
+Start database services:
 
 ```bash
 docker compose -f compose.dev.yml up -d

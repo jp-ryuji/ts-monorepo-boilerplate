@@ -75,6 +75,23 @@ The project uses environment variables for configuration. To set up your environ
 
 2. Update the `.env` file according to your local setup.
 
+### Option 1: Docker-based Development (Recommended)
+
+For the easiest setup, use Docker to run the database services:
+
+```bash
+docker compose -f compose.dev.yml up -d
+```
+
+### Option 2: Local Development
+
+For local development, you need to have PostgreSQL and Redis running on your local machine. You can start them using Docker Compose:
+
+```bash
+# Start only PostgreSQL and Redis (not the app containers)
+docker compose -f compose.dev.yml up -d
+```
+
 ## Verification
 
 After completing the installation and environment setup, you can verify everything is working correctly:
