@@ -26,7 +26,6 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
     "strictBindCallApply": true,
-    "noFallthroughCasesInSwitch": true,
-    "types": ["vitest/globals"]
+    "noFallthroughCasesInSwitch": true
   }
 }

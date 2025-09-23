@@ -9,6 +9,9 @@ The root `package.json` file contains scripts for managing the entire monorepo:
 | `pnpm dev`                 | Start both API and web in development mode    | `concurrently "pnpm --filter api start:dev" "pnpm --filter web dev"`         |
 | `pnpm dev:api`             | Start only the API service                    | `pnpm --filter api start:dev`                                                |
 | `pnpm dev:web`             | Start only the web service                    | `pnpm --filter web dev`                                                      |
+| `pnpm dev:local`           | Start both API and web with local .env config | `concurrently "pnpm dev:api:local" "pnpm dev:web:local"`                      |
+| `pnpm dev:api:local`       | Start API with local .env config              | `dotenv -e .env -- pnpm --filter api start:dev`                              |
+| `pnpm dev:web:local`       | Start web with local .env config              | `dotenv -e .env -- pnpm --filter web dev`                                    |
 | `pnpm build`               | Build both services                           | `pnpm --filter api build && pnpm --filter web build`                         |
 | `pnpm build:api`           | Build only the API service                    | `pnpm --filter api build`                                                    |
 | `pnpm build:web`           | Build only the web service                    | `pnpm --filter web build`                                                    |
@@ -77,12 +80,22 @@ The web service has its own set of scripts in `apps/web/package.json`:
 1. **Start development servers**:
 
    ```bash
-   # Start both services
+   # Start both services with Docker-based configuration
    pnpm dev
 
-   # Or start individually
+   # Or start individually with Docker-based configuration
    pnpm dev:api
    pnpm dev:web
+
+   # Start PostgreSQL and Redis for local development
+   docker compose up -d
+
+   # Start both services with local .env configuration
+   pnpm dev:local
+
+   # Or start individually with local .env configuration
+   pnpm dev:api:local
+   pnpm dev:web:local
    ```
 
 2. **Run tests**:

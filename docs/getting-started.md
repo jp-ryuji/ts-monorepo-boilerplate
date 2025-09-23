@@ -75,6 +75,14 @@ The project uses environment variables for configuration. To set up your environ
 
 2. Update the `.env` file according to your local setup.
 
+### Docker-based Development
+
+Use Docker to run the database services:
+
+```bash
+docker compose up -d
+```
+
 ## Verification
 
 After completing the installation and environment setup, you can verify everything is working correctly:
@@ -96,7 +104,7 @@ After completing the installation and environment setup, you can verify everythi
 
    ```bash
    # This will work if you've started the development containers
-   docker compose -f compose.dev.yml exec postgres pg_isready -U tsmono_user -d tsmono_db
+   docker compose exec postgres pg_isready -U tsmono_user -d tsmono_db
    ```
 
 You're now ready to start development with the TS monorepo boilerplate!
