@@ -16,9 +16,10 @@ describe('HealthService', () => {
       expect(result.info).toBe('Shallow health check passed');
     });
 
-    it('should return different timestamps for different calls', () => {
+    it('should return different timestamps for different calls', async () => {
       const result1 = healthService.shallowCheck();
-      // Add a small delay to ensure different timestamps
+      // Add a longer delay to ensure different timestamps
+      await new Promise(resolve => setTimeout(resolve, 10));
       const result2 = healthService.shallowCheck();
       expect(result1.timestamp).not.toBe(result2.timestamp);
     });
